@@ -1,0 +1,49 @@
+{% load static %}
+<!doctype html>
+<html lang="us">
+<head>
+    <meta charset="utf-8">
+    <title>the html header stuff should really be moved to a central location</title>
+    <link href="{% static 'steamify/js/jquery-ui-1.12.1.custom/jquery-ui.css' %}" rel="stylesheet">
+</head>
+<body>
+
+
+<h2>Enter scores</h2>
+<p>
+    <a href="{% url 'steamify:entryhome' %}">Score entry home</a>
+    &gt; Entering scores for <b><em> {% if view.kwargs.spontOrLong == "spont" %} Spontaneous {% else %} Long Problem {% endif %} </em></b>
+</p>
+<hr />
+<p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+</p>
+
+
+<script src="{% static 'steamify/js/jquery-ui-1.12.1.custom/external/jquery/jquery.js' %}"></script>
+<script src="{% static 'steamify/js/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
+<script>
+
+    // var inp = $("#teamid");
+    // console.log(inp);
+    // inp.keyup(function(){
+    //     var v = inp.val();
+    // });
+
+    $(function(){
+        var teams = [
+            "E.VA.156",
+            "E.EN.278",
+            "M.RO.390",
+            "M.EN.432"
+        ].sort();
+
+        $( "#id_team_id" ).autocomplete({
+            source: teams
+        });
+    });
+</script>

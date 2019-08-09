@@ -1,0 +1,11 @@
+<p>
+    {{ engmiddle.id }} <br/>
+    {{ engmiddle.presentation_quality }} <br/>
+    {{ engmiddle.something_one }}
+</p>
+
+<p><a href="{% url 'steamify:engmid-list' %}">back to list</a> </p>  
+
+<!--
+    This works, but we only want to allow editing if we can restrict it to the submitter.
+     <p><a href="{% url 'steamify:engmid-edit' engmiddle.id %}">edit</a> </p> -->

@@ -16,10 +16,15 @@ def vote(request, question_id):
 
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic
+from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 
-from .models import Choice, Question
+from .forms import PickTeamIdForm
+
+
+from .models import Choice, Question, EngMiddle
+# from .forms import EngMiddleForm
 
 
 class IndexView(generic.ListView):
@@ -58,3 +63,39 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('steamify:results', args=(question.id,)))
+
+
+engfields = ['something_one', 'presentation_quality']
+
+class EngMiddleCreate(CreateView):
+    model = EngMiddle
+    fields = engfields
+
+# Maybe do public-facing list, edit, view, and delete IF I CAN limit it
+# ALSO WE WOULD NEED TIME RESTRICTION. might not be worth it.
+#  only view/eit your own
+# class EngMiddleUpdate(UpdateView):
+#     model = EngMiddle
+#     fields = engfields
+# class EngMiddleDelete(DeleteView):
+#     model = EngMiddle
+#     success_url = "/"   # if using reverse, must use reverse_lazy here as per docs. example:  # reverse_lazy('EngMiddle-list')
+# class EngMidDetailView(generic.DetailView):
+#     model = EngMiddle
+# class EngMidListView(generic.ListView):
+#     model = EngMiddle
+#     def get_queryset(self):      
+#         # We would change this to only list your own submissions.
+#         return Question.objects.all()
+
+
+
+class PickTeamNameView(FormView):
+    template_name = 'steamify/pickteamname.html'
+    form_class = PickTeamIdForm
+
+    def form_valid(self, form):
+        # as per https://docs.djangoproject.com/en/2.2/topics/class-based-views/generic-editing/
+        # This method is called when valid form data has been POSTed. It should return an HttpResponse.
+        team_id = form.cleaned_data['team_id']
+        return HttpResponseRedirect(reverse("theNextStepInScoreEntry", fill_in_args_and_or_kwargs_in_the_reverse_call))
