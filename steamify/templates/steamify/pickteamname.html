@@ -11,8 +11,7 @@
 
 <h2>Enter scores</h2>
 <p>
-    <a href="{% url 'steamify:entryhome' %}">Score entry home</a>
-    &gt; Entering scores for <b><em> {% if view.kwargs.spontOrLong == "spont" %} Spontaneous {% else %} Long Problem {% endif %} </em></b>
+    Entering scores for <a href="{% url 'steamify:entryhome' %}"><b><em> {% if view.kwargs.spontOrLong == "spont" %} Spontaneous {% else %} Long Problem {% endif %} </em></b></a>
 </p>
 <hr />
 <p>

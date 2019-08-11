@@ -1,3 +1,10 @@
+<h2>Enter scores</h2>
+<p>
+    
+    Entering scores for <a href="{% url 'steamify:entryhome' %}"><b><em> {% if view.kwargs.spontOrLong == "spont" %} Spontaneous {% else %} Long Problem {% endif %} </em></b></a>
+    &gt;
+    <a href="{% url 'steamify:pickteamname' view.kwargs.spontOrLong %}">Team: {{ view.kwargs.team_id }}</a>
+</p>
 <form method="post">
     {% csrf_token %}
     <table> {{ form.as_table }} </table>

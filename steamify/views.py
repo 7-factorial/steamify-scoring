@@ -20,11 +20,12 @@ from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 
+from django.forms import modelform_factory
 from .forms import PickTeamIdForm
 
 
 from .models import Choice, Question, EngMiddle
-# from .forms import EngMiddleForm
+
 
 
 class IndexView(generic.ListView):
@@ -65,11 +66,9 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse('steamify:results', args=(question.id,)))
 
 
-engfields = ['something_one', 'presentation_quality']
-
 class EngMiddleCreate(CreateView):
     model = EngMiddle
-    fields = engfields
+    form_class = modelform_factory(EngMiddle, fields="__all__")
 
 # Maybe do public-facing list, edit, view, and delete IF I CAN limit it
 # ALSO WE WOULD NEED TIME RESTRICTION. might not be worth it.
@@ -90,7 +89,7 @@ class EngMiddleCreate(CreateView):
 
 
 
-class PickTeamNameView(FormView):
+class PickTeamIdView(FormView):
     template_name = 'steamify/pickteamname.html'
     form_class = PickTeamIdForm
 
@@ -98,4 +97,4 @@ class PickTeamNameView(FormView):
         # as per https://docs.djangoproject.com/en/2.2/topics/class-based-views/generic-editing/
         # This method is called when valid form data has been POSTed. It should return an HttpResponse.
         team_id = form.cleaned_data['team_id']
-        return HttpResponseRedirect(reverse("theNextStepInScoreEntry", fill_in_args_and_or_kwargs_in_the_reverse_call))
+        return HttpResponseRedirect(reverse("steamify:engmid-add", kwargs={'spontOrLong': self.kwargs['spontOrLong'], 'team_id': team_id}))
