@@ -3,7 +3,9 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from . import views
-from .views import EngMiddleCreate, PickTeamIdView
+from .views import GenericCreate, PickTeamIdView, EngMidDetailView, GenericUpdate
+from .models import EngMiddle
+from django.forms import modelform_factory
 """
 urlpatterns = [
     # ex: /polls/
@@ -17,6 +19,7 @@ urlpatterns = [
 ]
 """
 app_name = 'steamify'
+
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('<int:pk>/', views.DetailView.as_view(), name='detail'),
@@ -27,9 +30,42 @@ urlpatterns = [
     
     path('entry/<spontOrLong>/', PickTeamIdView.as_view(), name="pickteamname"),
 
-    path('entry/<spontOrLong>/<team_id>/', EngMiddleCreate.as_view(), name='engmid-add'),
-    # path('engmid/edit/<int:pk>/', EngMiddleUpdate.as_view(), name='engmid-edit'),
+    
+    # path('entry/<spontOrLong>/<team_id>/', GenericCreate.as_view(model=EngMiddle), name='engmid-add'),
+
+
+
+    # path('engmid/edit/<int:pk>/', GenericUpdate.as_view(), name='engmid-edit'),
     # path('engmid/delete/<int:pk>/', EngMiddleDelete.as_view(), name='engmid-delete'),
-    # path('engmid/view/<int:pk>/', EngMidDetailView.as_view(), name='engmid-view'),
+    path('engmid/view/<int:pk>/', EngMidDetailView.as_view(), name='engmid-view'),
     # path('engmid/', EngMidListView.as_view(), name='engmid-list'),
 ]
+
+model_ids = {
+    "M.EN": EngMiddle,
+}
+
+# This will create 2*n urls where n=number of competitions (not ideal, but I'm sure django can handle it. I'd be really surprised if it choked on anything less than 100 urls)
+for model_id, ModelClass in model_ids.items():
+    url_base = 'entry/<spontOrLong>/{}/<team_id_number>'.format(model_id)
+    
+    url_add = url_base + "/add"
+    name_add = "{}-add".format(model_id)
+    urlpatterns += [path(
+        url_add,
+        GenericCreate.as_view(
+            model=ModelClass,
+            form_class=modelform_factory(ModelClass, fields="__all__")),
+        name=name_add
+    )]
+
+    url_edit = url_base + "/edit/<pk>"
+    name_edit = "{}-edit".format(model_id)
+    urlpatterns += [path(
+        url_edit,
+        GenericUpdate.as_view(
+            model=ModelClass,
+            form_class=modelform_factory(ModelClass, fields="__all__")),
+        name=name_edit
+    )]
+    

@@ -1,12 +1,14 @@
+{% load crispy_forms_tags %}
+
 <h2>Enter scores</h2>
 <p>
     
     Entering scores for <a href="{% url 'steamify:entryhome' %}"><b><em> {% if view.kwargs.spontOrLong == "spont" %} Spontaneous {% else %} Long Problem {% endif %} </em></b></a>
     &gt;
-    <a href="{% url 'steamify:pickteamname' view.kwargs.spontOrLong %}">Team: {{ view.kwargs.team_id }}</a>
+    <a href="{% url 'steamify:pickteamname' view.kwargs.spontOrLong %}">Team: {{ view.kwargs.team_id_number }}</a>
 </p>
 <form method="post">
     {% csrf_token %}
-    <table> {{ form.as_table }} </table>
+    <table> {{ form|crispy }} </table>
     <input type="submit" value="Submit">
 </form>

@@ -66,21 +66,24 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse('steamify:results', args=(question.id,)))
 
 
-class EngMiddleCreate(CreateView):
-    model = EngMiddle
-    form_class = modelform_factory(EngMiddle, fields="__all__")
+class GenericCreate(CreateView):
+    template_name="steamify/generic_score_form.html"
+    # model = EngMiddle
+    # form_class = modelform_factory(model, fields="__all__")
 
 # Maybe do public-facing list, edit, view, and delete IF I CAN limit it
 # ALSO WE WOULD NEED TIME RESTRICTION. might not be worth it.
 #  only view/eit your own
-# class EngMiddleUpdate(UpdateView):
-#     model = EngMiddle
-#     fields = engfields
+class GenericUpdate(UpdateView):
+    template_name="steamify/generic_score_form.html"
+    
 # class EngMiddleDelete(DeleteView):
 #     model = EngMiddle
 #     success_url = "/"   # if using reverse, must use reverse_lazy here as per docs. example:  # reverse_lazy('EngMiddle-list')
-# class EngMidDetailView(generic.DetailView):
-#     model = EngMiddle
+
+class EngMidDetailView(generic.DetailView):
+    model = EngMiddle
+
 # class EngMidListView(generic.ListView):
 #     model = EngMiddle
 #     def get_queryset(self):      
@@ -88,6 +91,9 @@ class EngMiddleCreate(CreateView):
 #         return Question.objects.all()
 
 
+urlChoices = {
+    "M.EN": "steamify:M.EN-add",
+}
 
 class PickTeamIdView(FormView):
     template_name = 'steamify/pickteamname.html'
@@ -97,4 +103,10 @@ class PickTeamIdView(FormView):
         # as per https://docs.djangoproject.com/en/2.2/topics/class-based-views/generic-editing/
         # This method is called when valid form data has been POSTed. It should return an HttpResponse.
         team_id = form.cleaned_data['team_id']
-        return HttpResponseRedirect(reverse("steamify:engmid-add", kwargs={'spontOrLong': self.kwargs['spontOrLong'], 'team_id': team_id}))
+        # we know it's a valid team id, so we can parse it safely
+        grade, comp_type, team_id_number = team_id.split(".")
+        gct = grade + "." + comp_type
+
+        url = urlChoices[gct]
+        return HttpResponseRedirect(reverse(url,
+                kwargs={'spontOrLong': self.kwargs['spontOrLong'], 'team_id_number': team_id_number}))
