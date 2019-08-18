@@ -14,9 +14,15 @@ from django.urls import reverse
 #     votes = models.IntegerField(default=0)
 
 
+def rangeTuple(start, endInclusive):
+    return [(x, str(x)) for x in range(start, endInclusive + 1)]
+
+
 
 class Shared(models.Model):
-    something_one = models.CharField(max_length=200)
+    something_shared = models.IntegerField(
+        choices=rangeTuple(1, 5),
+        help_text="Did they do somethign well that involes all competitions?")
     # TODO: add judge = foreignKey(User)
     # maybe TODO? add grade_and_category
 
@@ -26,9 +32,12 @@ class Shared(models.Model):
     # year_in_school = models.IntegerField(choices=YEAR_IN_SCHOOL_CHOICES)
 
 
+
 # each instance of this will be a single score submission by one judge
 class EngMiddle(Shared):
-    presentation_quality = models.CharField(help_text="Did they present well? Did they do the things?", max_length=200)
+    presentation_quality = models.IntegerField(
+        choices=rangeTuple(1, 5),
+        help_text="Did they present well? Did they do the things?")
     TLA = "M.EN"
     # pub_date = models.DateTimeField('date published')
 
@@ -39,6 +48,13 @@ class VisualArtsMiddle(Shared):
     TLA = "M.VA"
 
 
+class VisualArtsElem(Shared):
+    artistic_artsyness = models.IntegerField(
+        choices=rangeTuple(1, 5),
+        help_text="Are they artsy? OR Fartsy?")
+    TLA = "E.VA"
+
+
 # TODO: is there a spont middle and a spont elem rubric?
 class Spont():
     TLA = "depends_if_there_is_mid_elem"
@@ -46,7 +62,7 @@ class Spont():
 
 
 # TODO: this needs the rest
-ALL_EXCEPT_SPONT = [EngMiddle, VisualArtsMiddle]
+ALL_EXCEPT_SPONT = [EngMiddle, VisualArtsMiddle, VisualArtsElem]
 
 # TODO: add spont if it ends up being useful
 ALL_COMPETS = ALL_EXCEPT_SPONT  #  + [Spont]
