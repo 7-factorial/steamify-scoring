@@ -30,12 +30,6 @@
 <script src="{% static 'steamify/js/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
 <script>
 
-    // var inp = $("#teamid");
-    // console.log(inp);
-    // inp.keyup(function(){
-    //     var v = inp.val();
-    // });
-
     $(function(){
         var teams = [
             "E.VA.156",
@@ -44,7 +38,7 @@
             "M.EN.432"
         ].sort();
 
-        $( "#id_team_id" ).autocomplete({
+        $( "#id_full_team_id" ).autocomplete({
             source: teams
         });
     });

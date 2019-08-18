@@ -4,15 +4,14 @@ from django.db import models
 from django.urls import reverse
 
 
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
-
-
-class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
+# class Question(models.Model):
+#     question_text = models.CharField(max_length=200)
+#     pub_date = models.DateTimeField('date published')
+#
+# class Choice(models.Model):
+#     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+#     choice_text = models.CharField(max_length=200)
+#     votes = models.IntegerField(default=0)
 
 
 
@@ -30,12 +29,24 @@ class Shared(models.Model):
 # each instance of this will be a single score submission by one judge
 class EngMiddle(Shared):
     presentation_quality = models.CharField(help_text="Did they present well? Did they do the things?", max_length=200)
+    TLA = "M.EN"
     # pub_date = models.DateTimeField('date published')
-
-    def get_absolute_url(self):
-        return reverse('steamify:engmid-view', kwargs={"pk": self.id})
 
 
 class VisualArtsMiddle(Shared):
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
+    TLA = "M.VA"
+
+
+# TODO: is there a spont middle and a spont elem rubric?
+class Spont():
+    TLA = "depends_if_there_is_mid_elem"
+    pass
+
+
+# TODO: this needs the rest
+ALL_EXCEPT_SPONT = [EngMiddle, VisualArtsMiddle]
+
+# TODO: add spont if it ends up being useful
+ALL_COMPETS = ALL_EXCEPT_SPONT  #  + [Spont]

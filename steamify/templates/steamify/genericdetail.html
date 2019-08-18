@@ -1,9 +1,10 @@
-<p>
-    Submission id: {{ engmiddle.id }} <br/>
-    
-    Somethin one: {{ engmiddle.something_one }} <br/>
-    Pres qual: {{ engmiddle.presentation_quality }} <br/>
-</p>
+{% for attrnam, attrvalu in serial_keys_vals.items %}
+  {{ attrnam }}: {{ attrvalu }} <br />
+{% endfor %}
+
+
+
+
 
 <!-- <p><a href="{ % url 'steamify:engmid-list' % }">back to list</a> </p>   -->
 
