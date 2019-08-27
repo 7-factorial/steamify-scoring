@@ -1,0 +1,6 @@
+<ul>
+    engmiddle_list
+{% for em in engmiddle_list %}
+    <li><a href="{{ em.get_absolute_url }}">{{ em.id }}</a></li>
+{% endfor %}
+</ul>
