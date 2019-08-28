@@ -15,8 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.shortcuts import redirect
+
+
+def redir_home(request):
+    return redirect("steamify:steamifyhome")
+
 
 urlpatterns = [
+    path('', redir_home),
     path('steamify/', include('steamify.urls')),
     path('admin/', admin.site.urls),
 ]

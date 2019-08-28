@@ -21,9 +21,8 @@ urlpatterns = [
 app_name = 'steamify'
 
 urlpatterns = [
-
+    path('', TemplateView.as_view(template_name='steamify/steamifyhome.html'), name="steamifyhome"),
     path('entry/', TemplateView.as_view(template_name='steamify/entryhome.html'), name="entryhome"),
-
     path('entry/<spontOrLong>/', PickTeamIdView.as_view(), name="pickteamname"),
 
     # path('engmid/delete/<int:pk>/', EngMiddleDelete.as_view(), name='engmid-delete'),
