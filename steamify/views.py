@@ -43,7 +43,7 @@ class GenericDetail(generic.DetailView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        context['serial_keys_vals'] = model_to_dict(kwargs['object'])
+        context['serial_keys_vals'] = model_to_dict(kwargs['object'], exclude=["id", "shared_ptr"])
         editname = 'steamify:{}-edit'.format(self.model.TLA)
         context['premade_edit_link'] = reverse(editname, kwargs=self.kwargs)
         return context
