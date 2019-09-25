@@ -1,0 +1,4 @@
+Login page links
+https://docs.djangoproject.com/en/2.2/topics/auth/default/#module-django.contrib.auth.views
+
+https://simpleisbetterthancomplex.com/tutorial/2016/06/27/how-to-use-djangos-built-in-login-system.html

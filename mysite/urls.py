@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import include, path
 from django.shortcuts import redirect
 
@@ -26,4 +27,7 @@ urlpatterns = [
     path('', redir_home),
     path('steamify/', include('steamify.urls')),
     path('admin/', admin.site.urls),
+    # raise NotImplementedError("Todo : https://docs.djangoproject.com/en/2.2/topics/auth/default/#module-django.contrib.auth.views")
+    # path('login/', auth_views.login, name='login'),
+    # path('logout/', auth_views.logout, name='logout'),
 ]

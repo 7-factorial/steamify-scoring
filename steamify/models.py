@@ -26,10 +26,17 @@ class Shared(models.Model):
     # TODO: add judge = foreignKey(User)
     # maybe TODO? add grade_and_category
 
-    # stg_two = models.CharField(max_length=200)
-
-    # YEAR_IN_SCHOOL_CHOICES = [(x, str(x)) for x in range(1, 5+1)]
-    # year_in_school = models.IntegerField(choices=YEAR_IN_SCHOOL_CHOICES)
+    # TODO: save must check if there's already an entry for
+    #   that judge
+    #   that team
+    #   that competition
+    # However there's an inevitable race condition. So
+    # ANOTHER TODO: On the server side, every minute or so, check if there's a double entry (criteria above).
+    # If it's same score, delete the latest one
+    # If it's different score, display on like a problem report.
+    # In fact, here's a way to do that:
+    # I (Jaime) will have a status page for myself which every 20 seconds sends a json request
+    # that will trigger the double-entry check and give some other status stuff (not yet decided what the other status stuff is).
 
 
 
@@ -56,7 +63,8 @@ class VisualArtsElem(Shared):
 
 
 # TODO: is there a spont middle and a spont elem rubric?
-class Spont():
+# TODO: This might need to inherit from `Shared`, that is `class Spont(Shared)`
+class Spont(Shared):
     TLA = "depends_if_there_is_mid_elem"
     pass
 
