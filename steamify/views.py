@@ -2,9 +2,11 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
+from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 from django.core import serializers
 from django.forms.models import model_to_dict
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.forms import modelform_factory
 from .forms import PickTeamIdForm
@@ -12,6 +14,10 @@ from .forms import PickTeamIdForm
 
 from .models import EngMiddle
 
+
+
+class EntryHomeView(LoginRequiredMixin, TemplateView):
+    template_name = "steamify/entryhome.html"
 
 
 def create_and_update_get_success_url(self):
@@ -22,14 +28,14 @@ def create_and_update_get_success_url(self):
         "pk": self.object.id})
 
 
-class GenericCreate(CreateView):
+class GenericCreate(LoginRequiredMixin, CreateView):
     template_name="steamify/generic_score_form.html"
     get_success_url = create_and_update_get_success_url
 
 # Maybe do public-facing list, edit, view, and delete IF I CAN limit it
 # ALSO WE WOULD NEED TIME RESTRICTION. might not be worth it.
 #  only view/eit your own
-class GenericUpdate(UpdateView):
+class GenericUpdate(LoginRequiredMixin, UpdateView):
     template_name="steamify/generic_score_form.html"
     get_success_url = create_and_update_get_success_url
 
@@ -37,7 +43,7 @@ class GenericUpdate(UpdateView):
 #     model = EngMiddle
 #     success_url = "/"   # if using reverse, must use reverse_lazy here as per docs. example:  # reverse_lazy('EngMiddle-list')
 
-class GenericDetail(generic.DetailView):
+class GenericDetail(LoginRequiredMixin, generic.DetailView):
     template_name="steamify/genericdetail.html"
 
     def get_context_data(self, **kwargs):
@@ -56,7 +62,7 @@ class GenericDetail(generic.DetailView):
 #         return Question.objects.all()
 
 
-class PickTeamIdView(FormView):
+class PickTeamIdView(LoginRequiredMixin, FormView):
     template_name = 'steamify/pickteamname.html'
     form_class = PickTeamIdForm
 

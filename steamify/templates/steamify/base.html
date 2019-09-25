@@ -9,6 +9,14 @@
     <link href="{% static 'steamify/css/bootstrap.css' %}" rel="stylesheet">
 </head>
 <body>
+    {% if user.is_authenticated %}
+        <div style="background-color: #ccc;">
+            Logged in as <b>{{ user }}</b>. 
+            <a href="{% url 'logout' %}">(Log out)</a>
+        </div>
+    {% endif %}
+    <br/>
+    <img src="{% static "steamify/img/steamify-logo.png" %}" alt="My image">
     {% block content %}{% endblock %}
 </body>
 </html>

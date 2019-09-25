@@ -124,3 +124,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = "staticfiles/"
 
 CRISPY_TEMPLATE_PACK = "bootstrap"
+
+LOGOUT_REDIRECT_URL = "/"
