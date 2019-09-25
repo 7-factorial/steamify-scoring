@@ -11,9 +11,10 @@
         &gt;
         <a href="{% url 'steamify:pickteamname' view.kwargs.spontOrLong %}">Team: {{ view.kwargs.team_id_number }}</a>
     </p>
+    <hr />
     <form method="post">
         {% csrf_token %}
         <table> {{ form|crispy }} </table>
-        <input type="submit" value="Submit Score" class="btn btn-primary">
+        <input type="submit" value="Submit Score" class="btn btn-large btn-primary">
     </form>
 {% endblock %}

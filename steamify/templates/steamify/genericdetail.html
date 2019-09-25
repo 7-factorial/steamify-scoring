@@ -3,10 +3,10 @@
 {% block content %}
   <h2>Enter scores</h2>
   <h3 style="color: #1c0">Score submitted!</h3>
-  <p>You can 
-      <a href="{{ premade_edit_link }}">edit</a>
-      this score, or
-      <a href="{% url 'steamify:entryhome' %}">go to score entry home.</a></p>
+  <p>
+      <a class="btn"  href="{% url 'steamify:entryhome' %}">Score entry home</a>
+      <a class="btn" href="{{ premade_edit_link }}">Edit this score</a>
+  </p>
   <hr />
   <p><em>Your submission:</em></p> 
   <p>   
