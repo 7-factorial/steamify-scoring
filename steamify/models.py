@@ -30,10 +30,11 @@ class Shared(models.Model):
     #   that judge
     #   that team
     #   that competition
-    # However there's an inevitable race condition. So
+    # If there is, then... Display an error and say "Are you trying to edit your submission?" then give a link
+    # However there's an inevitable race condition.
     # ANOTHER TODO: On the server side, every minute or so, check if there's a double entry (criteria above).
-    # If it's same score, delete the latest one
-    # If it's different score, display on like a problem report.
+    # If it's same score, delete the oldest one
+    # If it's different score, display on like a problem report. (presumably the person submitted twice quickly, OR they used the back button and submitted again)
     # In fact, here's a way to do that:
     # I (Jaime) will have a status page for myself which every 20 seconds sends a json request
     # that will trigger the double-entry check and give some other status stuff (not yet decided what the other status stuff is).
@@ -64,7 +65,7 @@ class VisualArtsElem(Shared):
 
 # TODO: is there a spont middle and a spont elem rubric?
 # TODO: This might need to inherit from `Shared`, that is `class Spont(Shared)`
-class Spont(Shared):
+class Spont():
     TLA = "depends_if_there_is_mid_elem"
     pass
 
