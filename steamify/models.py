@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 from django.urls import reverse
@@ -9,12 +10,34 @@ def rangeTuple(start, endInclusive):
     return [(x, str(x)) for x in range(start, endInclusive + 1)]
 
 
+class Team(models.Model):
+    dotted_id = models.CharField(max_length=20, primary_key=True)
+    name = models.CharField(max_length=300)
+
+
+
 
 class Shared(models.Model):
     something_shared = models.IntegerField(
         choices=rangeTuple(1, 5),
         help_text="Did they do somethign well that involes all competitions?")
-    # TODO: add judge = foreignKey(User)
+    judge = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.PROTECT,
+        )
+    # REALLY IMPORTANT TODO
+    # TODO
+    # SUPER IMPORTANT ***************
+    # team = ....
+
+    def save(self, *args, **kwargs):
+        if self._state.adding:
+            print("ADDING\n"*5)
+        else:
+            print("NOT ADDING\n"*5)
+        # self.judge = 
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+
     # maybe TODO? add grade_and_category
 
     # TODO: save must check if there's already an entry for

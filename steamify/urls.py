@@ -44,7 +44,7 @@ for ModelClass in ALL_COMPETS:
         url_add,
         GenericCreate.as_view(
             model=ModelClass,
-            form_class=modelform_factory(ModelClass, fields="__all__")),
+            form_class=modelform_factory(ModelClass, exclude=["judge"])),
         name=name_add
     )]
 
