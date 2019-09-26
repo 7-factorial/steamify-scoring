@@ -7,18 +7,18 @@
     <title>Steamify Score Entry</title>
     <link href="{% static 'steamify/js/jquery-ui-1.12.1.custom/jquery-ui.css' %}" rel="stylesheet">
     <link href="{% static 'steamify/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'steamify/css/steamify.css' %}" rel="stylesheet">
 </head>
 <body>
     {% if user.is_authenticated %}
-        <div style="background-color: #ccc; padding-left:10px;">
+        <div class="steamify-login-state">
             Logged in as <b>{{ user }}</b>. 
             <a href="{% url 'logout' %}">(Log out)</a>
         </div>
     {% endif %}
-    <br/>
-    <div style="padding-left: 5px;">
-    <img src="{% static "steamify/img/steamify-logo.png" %}" alt="Image: Steamify Logo">
+    
+    <img class="steamify-logo" src="{% static "steamify/img/steamify-logo.png" %}" alt="Image: Steamify Logo">
+    
     {% block content %}{% endblock %}
-    </div>
 </body>
 </html>

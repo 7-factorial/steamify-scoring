@@ -4,11 +4,23 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <h2>Enter scores</h2>
-    <p>
-        Entering scores for <a href="{% url 'steamify:entryhome' %}"><b><em> {% if view.kwargs.spontOrLong == "spont" %} Spontaneous {% else %} Long Problem {% endif %} </em></b></a>
+    <p class="steamify-breadcrumb">
+        <a href="{% url 'steamify:steamifyhome' %}"><i class="icon-home"></i> </a>
+        &gt;        
+        <a href="{% url 'steamify:entryhome' %}">Score Entry</a>
+        &gt;
+<!--        <a href="{% url 'steamify:pickteamname' view.kwargs.spontOrLong %}"> -->
+        <b>
+            {% if view.kwargs.spontOrLong == "spont" %}
+                Spontaneous 
+            {% else %}
+                Long Problem
+            {% endif %}
+        </b>
     </p>
+    
     <hr />
+    <div class="main-content">
     <p>
         <form method="post">
             {% csrf_token %}
@@ -16,6 +28,7 @@
             <input type="submit" value="Continue..." class="btn">
         </form>
     </p>
+    </div>
 
 
     <script src="{% static 'steamify/js/jquery-ui-1.12.1.custom/external/jquery/jquery.js' %}"></script>

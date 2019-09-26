@@ -1,11 +1,29 @@
 {% extends "steamify/base.html" %}
 
 {% block content %}
-  <h2>Enter scores</h2>
+  <p class="steamify-breadcrumb">
+      <a href="{% url 'steamify:steamifyhome' %}"><i class="icon-home"></i> </a>
+      &gt;        
+      <a href="{% url 'steamify:entryhome' %}">Score Entry</a>
+      &gt;
+      <a href="{% url 'steamify:pickteamname' view.kwargs.spontOrLong %}">
+          {% if view.kwargs.spontOrLong == "spont" %}
+              Spontaneous 
+          {% else %}
+              Long Problem
+          {% endif %}
+      </a>
+      &gt;
+      <a href="{{ premade_edit_link }}">
+          Team: {{ view.kwargs.team_id_number }}
+      </a>
+      
+  </p>
+
+  <hr/>
   <h3 style="color: #1c0">Score submitted!</h3>
   <p>
-      <a class="btn"  href="{% url 'steamify:entryhome' %}">Score entry home</a>
-      <a class="btn" href="{{ premade_edit_link }}">Edit this score</a>
+      <a class="btn" href="{% url 'steamify:pickteamname' view.kwargs.spontOrLong %}">Enter another score</a>
   </p>
   <hr />
   <p><em>Your submission:</em></p> 
@@ -13,6 +31,7 @@
   {% for attrnam, attrvalu in serial_keys_vals.items %}
     <b>{{ attrnam }}</b>: {{ attrvalu }} <br />
   {% endfor %}
+  <a class="btn" href="{{ premade_edit_link }}">Edit</a>
   </p>
 
 
