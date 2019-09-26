@@ -33,13 +33,6 @@ class Shared(models.Model):
     # SUPER IMPORTANT ***************
     # team = ....
 
-    def save(self, *args, **kwargs):
-        if self._state.adding:
-            print("ADDING\n"*5)
-        else:
-            print("NOT ADDING\n"*5)
-        # self.judge = 
-        super().save(*args, **kwargs)  # Call the "real" save() method.
 
     # maybe TODO? add grade_and_category
 
