@@ -1,0 +1,8 @@
+the next step is probably recording the judge username on submission.
+
+then put actual rubrics in.
+
+TODO when assigning ids:
+    ideally, the numerical order of the ids should match the
+    alpha sorting so that 
+    sorted(full_team_ids) == sorted(team_ids_numerical_portion_only)
