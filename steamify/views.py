@@ -33,6 +33,12 @@ class GenericCreate(LoginRequiredMixin, CreateView):
     template_name="steamify/generic_score_form.html"
     get_success_url = create_and_update_get_success_url
 
+    def form_valid(self, form):
+        # as per https://docs.djangoproject.com/en/2.2/topics/class-based-views/generic-editing/#models-and-request-user
+        form.instance.judge = self.request.user
+        return super().form_valid(form)
+
+
 # Maybe do public-facing list, edit, view, and delete IF I CAN limit it
 # ALSO WE WOULD NEED TIME RESTRICTION. might not be worth it.
 #  only view/eit your own
@@ -50,7 +56,7 @@ class GenericDetail(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        context['serial_keys_vals'] = model_to_dict(kwargs['object'], exclude=["id", "shared_ptr"])
+        context['serial_keys_vals'] = model_to_dict(kwargs['object'], exclude=["id", "shared_ptr", "judge"])
         editname = 'steamify:{}-edit'.format(self.model.TLA)
         context['premade_edit_link'] = reverse(editname, kwargs=self.kwargs)
         return context
