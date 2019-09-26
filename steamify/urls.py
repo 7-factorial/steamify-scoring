@@ -33,6 +33,11 @@ urlpatterns = [
 # model_ids = {
 #     "M.EN": EngMiddle,
 
+def run_as_view(ViewClass, ModelClass):
+    return ViewClass.as_view(
+            model=ModelClass,
+            form_class=modelform_factory(ModelClass, exclude=["judge"]))
+
 # This will create 2*n urls where n=number of competitions (not ideal, but I'm sure django can handle it. I'd be really surprised if it choked on anything less than 100 urls)
 for ModelClass in ALL_COMPETS:
     model_tla = ModelClass.TLA
@@ -42,9 +47,7 @@ for ModelClass in ALL_COMPETS:
     name_add = "{}-add".format(model_tla)
     urlpatterns += [path(
         url_add,
-        GenericCreate.as_view(
-            model=ModelClass,
-            form_class=modelform_factory(ModelClass, exclude=["judge"])),
+        run_as_view(GenericCreate, ModelClass),
         name=name_add
     )]
 
@@ -52,9 +55,7 @@ for ModelClass in ALL_COMPETS:
     name_edit = "{}-edit".format(model_tla)
     urlpatterns += [path(
         url_edit,
-        GenericUpdate.as_view(
-            model=ModelClass,
-            form_class=modelform_factory(ModelClass, fields="__all__")),
+        run_as_view(GenericUpdate, ModelClass),
         name=name_edit
     )]
 
