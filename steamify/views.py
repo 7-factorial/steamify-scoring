@@ -7,12 +7,13 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormVi
 from django.core import serializers
 from django.forms.models import model_to_dict
 from django.contrib.auth.mixins import LoginRequiredMixin
+import json
 
 from django.forms import modelform_factory
 from .forms import PickTeamIdForm
 
 
-from .models import EngMiddle
+from .models import EngMiddle, Team
 
 
 
@@ -65,6 +66,13 @@ class GenericDetail(LoginRequiredMixin, generic.DetailView):
 class PickTeamIdView(LoginRequiredMixin, FormView):
     template_name = 'steamify/pickteamname.html'
     form_class = PickTeamIdForm
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        dotted_ids = list(Team.objects.values_list('dotted_id', flat=True).order_by('dotted_id'))   # pylint: disable=no-member
+        context['sorted_team_ids'] = json.dumps(dotted_ids)
+        return context
 
     def form_valid(self, form):
         # as per https://docs.djangoproject.com/en/2.2/topics/class-based-views/generic-editing/
