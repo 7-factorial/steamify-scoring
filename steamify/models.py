@@ -28,6 +28,9 @@ class Shared(models.Model):
         get_user_model(),
         on_delete=models.PROTECT,
         )
+
+    def __str__(self):
+        return "Score entry for {} (NEED TEAM ID) judged by {}".format(self.TLA, self.judge)
     # REALLY IMPORTANT TODO
     # TODO
     # SUPER IMPORTANT ***************
