@@ -1,0 +1,21 @@
+.steamify-login-state {
+    background-color: #ccc;
+    padding:5px;
+}
+
+.steamify-breadcrumb a {
+    color: #c80;
+}
+
+.steamify-breadcrumb {
+    background-color: aliceblue;
+    padding: 5px;
+}
+
+.steamify-logo {
+    padding: 5px;
+}
+
+.main-content {
+    padding: 5px;
+}
