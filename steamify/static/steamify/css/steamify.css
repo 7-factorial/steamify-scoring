@@ -19,3 +19,12 @@
 .main-content {
     padding: 5px;
 }
+
+.control-group {
+    padding-top: 10px;
+    border-top: 1px solid #777;
+}
+
+.control-label {
+    font-weight: bold;
+}
