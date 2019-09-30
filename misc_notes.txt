@@ -1,7 +1,18 @@
-the next step is probably recording the judge username on submission.
+Put jquery slider BOUND TO SELECT because it gives both options (slider or select)
 
-then put actual rubrics in.
+put actual rubrics in.
 
+record team on submission
+
+Spontaneous is still not set up.
+
+do all things marked TODO
+
+if time:
+ - test javascript-less
+ - test on iphone and a few androids
+
+LATER:
 TODO when assigning ids:
     ideally, the numerical order of the ids should match the
     alpha sorting so that 
