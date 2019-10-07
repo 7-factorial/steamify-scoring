@@ -14,11 +14,11 @@ from django.urls import reverse
 
 def labeledRangeTuple():
     return [
-        (1, "1"),
+        (1, "1 (lowest)"),
         (2, "2"),
-        (3, "3"),
+        (3, "3 (meets described standards)"),
         (4, "4"),
-        (5, "5")
+        (5, "5 (exceeds described standards)")
     ]
 
 
@@ -38,20 +38,50 @@ def htmlListify(rawstr):
     return "<ul>{}</ul>".format(with_lis)
 
 
+def verify_team_id_before_creating(teamObj):
+    # type: (Team) -> None
+
+    dotid = teamObj.dotted_id  # type:str
+            
+    # if it doesn't have 2 dots, then this will fail
+    gradeletter, subject, numericalpart = dotid.split(".")
+    
+    if gradeletter not in ("E", "M"):
+        raise ValueError("Team id must start with E or M")
+    
+    thisTla = gradeletter + "." + subject
+    TLAS = [x.TLA for x in ALL_EXCEPT_SPONT]
+    if thisTla not in TLAS:
+        raise ValueError("{} does not appear to be a valid TLA".format(thisTla))
+
+    try:
+        existing = Team.objects.get(dotted_id__endswith=numericalpart)                
+    except Team.DoesNotExist:
+        pass  # The good case is not finding a team with that number.
+    else:
+        raise ValueError("The numerical portion '{}' already exists: '{}'. All numbers must be unique".format(numericalpart, existing.dotted_id))    
+
+
 class Team(models.Model):
     dotted_id = models.CharField(max_length=20, primary_key=True)
     name = models.CharField(max_length=300)
+    school_name = models.CharField(max_length=300)
 
     def __str__(self):
         return "'{}' ({})".format(self.name, self.dotted_id)
+    
+    def save(self, *args, **kwargs):        
+        if self._state.adding:
+            verify_team_id_before_creating(self)
 
-
+        super().save(*args, **kwargs)  # Call the "real" save() method.
 
 
 class Shared(models.Model):
     # something_shared = models.IntegerField(
     #     choices=labeledRangeTuple(),
     #     help_text="Did they do somethign well that involes all competitions?")
+    TLA = "Shared_class_which_only_has_TLA_to_avoid_exceptions"
     judge = models.ForeignKey(
         get_user_model(),
         on_delete=models.PROTECT,
