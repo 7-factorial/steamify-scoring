@@ -20,13 +20,11 @@
     </p>
 
     <div class="main-content">
-    <p>
         <form method="post">
             {% csrf_token %}
             {{ form|crispy }}
             <input type="submit" value="Continue..." class="btn">
         </form>
-    </p>
     </div>
 
 
