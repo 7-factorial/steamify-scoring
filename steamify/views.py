@@ -5,15 +5,16 @@ from django.views import generic
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 from django.core import serializers
-from django.forms.models import model_to_dict
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 import json
 
 from django.forms import modelform_factory
 from .forms import PickTeamIdForm
 
+from .utils.misc import score_instance_to_dict
 
-from .models import EngMiddle, Team
+from .models import Team
 
 
 
@@ -56,7 +57,7 @@ class GenericDetail(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        context['serial_keys_vals'] = model_to_dict(kwargs['object'], exclude=["id", "shared_ptr", "judge"])
+        context['serial_keys_vals'] = score_instance_to_dict(kwargs['object'])
         editname = 'steamify:{}-edit'.format(self.model.TLA)
         context['premade_edit_link'] = reverse(editname, kwargs=self.kwargs)
         return context
