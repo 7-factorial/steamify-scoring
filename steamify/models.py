@@ -68,7 +68,7 @@ class Team(models.Model):
     school_name = models.CharField(max_length=300)
 
     def __str__(self):
-        return "'{}' ({})".format(self.name, self.dotted_id)
+        return "{}: '{}' ({})".format(self.dotted_id, self.name, self.school_name)
     
     def save(self, *args, **kwargs):        
         if self._state.adding:
@@ -110,6 +110,7 @@ class Shared(models.Model):
     # I (Jaime) will have a status page for myself which every 20 seconds sends a json request
     # that will trigger the double-entry check and give some other status stuff (not yet decided what the other status stuff is).
 
+    # probably TODO: pub_date = models.DateTimeField('date published')
 
 
 # each instance of this will be a single score submission by one judge
@@ -135,32 +136,73 @@ class EngMiddle(Shared):
         Statement is neat and has 1-3 spelling/grammatical/punctuation errors.
         Statement links standards to key elements and outcome, but may be unclear in one or two places.""")
     
-    
-    # pub_date = models.DateTimeField('date published')
+
+class EngElem(Shared):
+    TLA = "E.EN"
 
 
 class VisualArtsMiddle(Shared):
+    TLA = "M.VA"
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
-    TLA = "M.VA"
 
 
 class VisualArtsElem(Shared):
+    TLA = "E.VA"
     artistic_artsyness = models.IntegerField(
         choices=labeledRangeTuple(),
         help_text="Are they artsy? OR Fartsy?")
-    TLA = "E.VA"
+
+
+class AeroMiddle(Shared):
+    TLA = "M.AE"
+
+
+class DanceMiddle(Shared):
+    TLA = "M.DA"
+
+
+class DanceElem(Shared):
+    TLA = "E.DA"
+
+
+class DebateMiddle(Shared):
+    TLA = "M.DE"
+
+
+class RocketMiddle(Shared):
+    TLA = "M.RO"
+
+
+class SpokenMiddle(Shared):
+    TLA = "M.SW"
+
+
+class SpokenElem(Shared):
+    TLA = "E.SW"
+
+
+class TheaterMiddle(Shared):
+    TLA = "M.TH"
+
+
+class TheaterElem(Shared):
+    TLA = "E.TH"
+
 
 
 # TODO: is there a spont middle and a spont elem rubric?
 # TODO: This might need to inherit from `Shared`, that is `class Spont(Shared)`
 class Spont():
-    TLA = "depends_if_there_is_mid_elem"
+    # TLA =   # There shouldn't be a TLA for Spont because all teams have another category
     pass
 
 
-# TODO: this needs the rest
-ALL_EXCEPT_SPONT = [EngMiddle, VisualArtsMiddle, VisualArtsElem]
+# VERIFIED 2019 Oct 7 at 5:02 pm - this contains all competitions
+ALL_EXCEPT_SPONT = [EngMiddle, EngElem, VisualArtsMiddle, VisualArtsElem,
+                    AeroMiddle, DanceMiddle, DanceElem, DebateMiddle, 
+                    RocketMiddle, SpokenMiddle, SpokenElem, TheaterMiddle,
+                    TheaterElem]
 
 # TODO: add spont if it ends up being useful
 ALL_COMPETS = ALL_EXCEPT_SPONT  #  + [Spont]

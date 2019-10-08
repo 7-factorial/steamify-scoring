@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 
 from . import views
 from .views import GenericCreate, PickTeamIdView, GenericDetail, GenericUpdate, EntryHomeView
-from .models import EngMiddle, VisualArtsMiddle, ALL_COMPETS
+from .models import ALL_COMPETS
 from django.forms import modelform_factory
 """
 urlpatterns = [
