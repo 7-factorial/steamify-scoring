@@ -28,3 +28,7 @@
 .control-label {
     font-weight: bold;
 }
+
+.rubric-questions .help-block {
+    display: none;
+}
