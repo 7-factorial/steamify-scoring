@@ -7,7 +7,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormVi
 from django.core import serializers
 from django.contrib import auth
 from django import db
-from typing import Tuple
+from typing import Tuple, Optional
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 import json
@@ -98,17 +98,25 @@ class GenericDetail(LoginRequiredMixin, generic.DetailView):
 #         return Question.objects.all()
 
 def getPastSubmissionsInAllCompets(judgeInstance, spontOrLong):
-    # type: (auth.models.User, str) -> dict
+    # type: (auth.models.User, str) -> Optional[dict]
 
     def _one(compet):
         # type: (db.models.model) -> Tuple[str, list]
         competData = list(compet.objects.filter(judge=judgeInstance))
         return compet.__name__, competData
 
-    if spontOrLong == "spont":
-        return {"Spontaneous": ["TODO:  NOT IMPLEMENTED YET!!!"]}
+    def _all():
+        # type: () -> dict
+        if spontOrLong == "spont":
+            return {"Spontaneous": ["TODO:  NOT IMPLEMENTED YET!!!"]}
+        else:
+            return dict(map(_one, ALL_EXCEPT_SPONT))
+        
+    resu = _all()
+    if not any(resu.values()):
+        return None
     else:
-        return dict(map(_one, ALL_EXCEPT_SPONT))
+        return resu
 
 
 class PickTeamIdView(LoginRequiredMixin, FormView):
