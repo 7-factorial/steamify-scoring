@@ -98,7 +98,6 @@ class Shared(models.Model):
 
     def save(self, *args, **kwargs):
         """On save, update timestamps"""
-        import pdb; pdb.set_trace()
         if self._state.adding:
             self.created_at = timezone.now()
         else:

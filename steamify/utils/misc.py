@@ -10,6 +10,5 @@ def score_instance_to_dict(instance):
 
 def makeEditLink(tla, revkwargs):
     # type: (str, dict) -> str
-    import pdb; pdb.set_trace()
     editname = 'steamify:{}-edit'.format(tla)
     return reverse(editname, kwargs=revkwargs)
