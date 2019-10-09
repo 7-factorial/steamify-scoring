@@ -1,11 +1,13 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.html import format_html
-
+from typing import List, Type
+from django.utils import timezone
 
 # Create your models here.
 from django.urls import reverse
 
+from .utils.misc import makeEditLink
 
 
 # def rangeTuple(start, endInclusive):
@@ -82,17 +84,37 @@ class Shared(models.Model):
     #     choices=labeledRangeTuple(),
     #     help_text="Did they do somethign well that involes all competitions?")
     TLA = "Shared_class_which_only_has_TLA_to_avoid_exceptions"
+    spontOrLong = "long"  # override this in spont
     judge = models.ForeignKey(
         get_user_model(),
         on_delete=models.PROTECT,
         )
+    team = models.ForeignKey(
+        Team,
+        on_delete=models.PROTECT,
+        )
+    created_at = models.DateTimeField()
+    modified_at = models.DateTimeField(null=True)
+
+    def save(self, *args, **kwargs):
+        """On save, update timestamps"""
+        import pdb; pdb.set_trace()
+        if self._state.adding:
+            self.created_at = timezone.now()
+        else:
+            self.modified_at = timezone.now()
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return "Score entry for {} (NEED TEAM ID) judged by {}".format(self.TLA, self.judge)
-    # REALLY IMPORTANT TODO
-    # TODO
-    # SUPER IMPORTANT ***************
-    # team = ....
+        return "Score entry for {} (TODO: NEED TEAM ID) judged by {}".format(self.TLA, self.judge)
+    
+    def get_absolute_url(self):
+        # type: (...) -> str
+        # TODO (I think this works, but a bit more testing would be nice)
+        return makeEditLink(self.TLA, {
+            'spontOrLong': self.spontOrLong,
+            'full_team_id': self.team.dotted_id,
+            'pk': self.pk})
 
 
     # maybe TODO? add grade_and_category
@@ -194,7 +216,11 @@ class TheaterElem(Shared):
 # TODO: is there a spont middle and a spont elem rubric?
 # TODO: This might need to inherit from `Shared`, that is `class Spont(Shared)`
 class Spont():
-    # TLA =   # There shouldn't be a TLA for Spont because all teams have another category
+    # TLA =   
+    # # There shouldn't be a TLA for Spont because all teams have another category; 
+    #  BUT TODO: I need to check where TLA is used to make sure I don't assume 1-to-1 
+    # and therefore break Spont
+    spontOrLong = "spont"
     pass
 
 
@@ -202,7 +228,7 @@ class Spont():
 ALL_EXCEPT_SPONT = [EngMiddle, EngElem, VisualArtsMiddle, VisualArtsElem,
                     AeroMiddle, DanceMiddle, DanceElem, DebateMiddle, 
                     RocketMiddle, SpokenMiddle, SpokenElem, TheaterMiddle,
-                    TheaterElem]
+                    TheaterElem]  # type: List[Type[Shared]]
 
 # TODO: add spont if it ends up being useful
 ALL_COMPETS = ALL_EXCEPT_SPONT  #  + [Spont]

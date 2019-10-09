@@ -20,11 +20,15 @@
     </p>
 
     <div class="main-content">
+        <br />
         <form method="post">
             {% csrf_token %}
             {{ form|crispy }}
             <input type="submit" value="Continue..." class="btn">
         </form>
+        <br />
+        <hr />
+        {% include "steamify/past.html" %}
     </div>
 
 

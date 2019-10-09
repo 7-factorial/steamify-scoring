@@ -36,12 +36,12 @@ urlpatterns = [
 def run_as_view(ViewClass, ModelClass):
     return ViewClass.as_view(
             model=ModelClass,
-            form_class=modelform_factory(ModelClass, exclude=["judge"]))
+            form_class=modelform_factory(ModelClass, exclude=["judge", "team", "created_at", "modified_at"]))
 
 # This will create 2*n urls where n=number of competitions (not ideal, but I'm sure django can handle it. I'd be really surprised if it choked on anything less than 100 urls)
 for ModelClass in ALL_COMPETS:
     model_tla = ModelClass.TLA
-    url_base = 'entry/<spontOrLong>/{}/<team_id_number>'.format(model_tla)
+    url_base = 'entry/<spontOrLong>/{}/<full_team_id>'.format(model_tla)
 
     url_add = url_base + "/add"
     name_add = "{}-add".format(model_tla)

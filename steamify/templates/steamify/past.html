@@ -1,0 +1,22 @@
+<h4>Your past submissions:</h4>
+
+{% for compet_name, compet_entries in past_submissions.items %}
+    {% if compet_entries %}
+
+        <div style="margin-left: 5px;"><b>{{ compet_name }}: </b></div>
+
+        <table style="margin-left: 15px;">
+            <tbody>
+                {% for centry in compet_entries %}
+                    <tr>
+                        <td><a href="{{ centry.get_absolute_url }}"> team: {{ centry.team }} TODO - PUT TEAM NAMES, ID, submitted time, ETC ETC</a> <br /></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+    {% endif %}
+{% endfor %}
+
+        
