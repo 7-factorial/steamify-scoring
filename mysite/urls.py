@@ -28,7 +28,4 @@ urlpatterns = [
     path('steamify/', include('steamify.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    # raise NotImplementedError("Todo : https://docs.djangoproject.com/en/2.2/topics/auth/default/#module-django.contrib.auth.views")
-    # path('login/', auth_views.login, name='login'),
-    # path('logout/', auth_views.logout, name='logout'),
 ]
