@@ -1,3 +1,5 @@
+Time-ordered list of editable submissions which has table of [team_id, team_name, submission_timestamp, school_name]
+
 Put jquery slider BOUND TO SELECT because it gives both options (slider or select)
 
 put actual rubrics in.
@@ -6,14 +8,18 @@ record team on submission
 
 Spontaneous is still not set up.
 
+Make edit cutoff dynamic on the day so that I can mark it as closed
+
 do all things marked TODO
 
 if time:
  - test javascript-less
  - test on iphone and a few androids
 
-LATER:
-TODO when assigning ids:
-    ideally, the numerical order of the ids should match the
-    alpha sorting so that 
-    sorted(full_team_ids) == sorted(team_ids_numerical_portion_only)
+Repeating: change team ids and names as needed
+
+For averaging, use score_instance_to_dict.
+    Use assert to verify that it's averaging the expected fields for at least 2 (but ideally all)
+    of the competitions. The nice thing about assert is that if anything changes
+    then it will tell me. 
+    Remember that averaging can be one of the final steps. 
