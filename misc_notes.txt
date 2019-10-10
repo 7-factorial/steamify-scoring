@@ -1,24 +1,32 @@
-Time-ordered list of editable submissions which has table of [team_id, team_name, submission_timestamp, school_name]
+ctrl shift f 'exclude' and centralize that
+
+TEST MORE WHAT I JUST CHANGED, then commit.
 
 Put jquery slider BOUND TO SELECT because it gives both options (slider or select)
+I'm pretty sure that the way they do it
+ ( https://jqueryui.com/slider/#hotelrooms )
+would gracefully degrade. Now that I have NoScript, I can test it. Everything else that I've done so far degraded gracefully.
+
+----------- should be ready for video at this point. ----------------
+
+add 'view old submissions' for spontaneous.
+
+See if I need to add anything else to make spont work.
 
 put actual rubrics in.
 
-record team on submission
-
-Spontaneous is still not set up.
+do all things marked TODO
 
 Make edit cutoff dynamic on the day so that I can mark it as closed
 
-do all things marked TODO
+
 
 if time:
  - test javascript-less
  - test on iphone and a few androids
+ - (not very important) Just before competition - make sure team ids and names are good
 
-Repeating: change team ids and names as needed
-
-For averaging, use score_instance_to_dict.
+For averaging, use score_instance_to_dict to get relevant fields.
     Use assert to verify that it's averaging the expected fields for at least 2 (but ideally all)
     of the competitions. The nice thing about assert is that if anything changes
     then it will tell me. 
