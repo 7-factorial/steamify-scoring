@@ -5,6 +5,7 @@ from django.views.generic import TemplateView
 from . import views
 from .views import GenericCreate, PickTeamIdView, GenericDetail, GenericUpdate, EntryHomeView
 from .models import ALL_EXCEPT_SPONT, Spont, Shared
+from .utils.misc import shared_fields_to_exlude_in_user_forms
 from django.forms import modelform_factory
 from typing import List, Callable, Type
 
@@ -26,7 +27,7 @@ def run_as_view(ViewClass, ModelClass):
     return ViewClass.as_view(
             model=ModelClass,
             form_class=modelform_factory(ModelClass,
-                exclude=["judge", "team", "created_at", "modified_at"]))
+                exclude=shared_fields_to_exlude_in_user_forms))
 
 
 def createUrls(ModelClass, tla_ish):
