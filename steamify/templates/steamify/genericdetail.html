@@ -17,12 +17,22 @@
       <a href="{{ premade_edit_link }}">
           {{ team }}
       </a>
+      &gt;
+      Confirmation
       
   </p>
 
   <h3 style="color: #1c0">Score submitted!</h3>
   <p>
-      <a class="btn" href="{% url 'steamify:pickteamname' view.kwargs.spontOrLong %}"><i class="icon-plus-sign"></i> Enter another score</a>
+      <a class="btn" href="{% url 'steamify:pickteamname' view.kwargs.spontOrLong %}">
+        <!-- <i class="icon-plus-sign"></i> Enter another score -->
+        Go to {% if view.kwargs.spontOrLong == "spont" %}
+                spontaneous 
+            {% else %}
+                long problem
+            {% endif %}
+        entry home
+      </a>
   </p>
   <hr />
   <p><em>Your submission:</em></p> 
