@@ -17,7 +17,7 @@ from .forms import PickTeamIdForm
 
 from .utils.misc import score_instance_to_dict, makeEditLink
 
-from .models import Team, ALL_EXCEPT_SPONT, Shared
+from .models import Team, ALL_EXCEPT_SPONT, Shared, Spont
 
 
 
@@ -26,7 +26,11 @@ class EntryHomeView(LoginRequiredMixin, TemplateView):
 
 
 def create_and_update_get_success_url(self):
-    viewname = 'steamify:{}-view'.format(self.model.TLA)
+    if self.model.TLA == "FAKE_TLA_FOR_SPONT":
+        partial = "spont"
+    else:
+        partial = self.model.TLA
+    viewname = 'steamify:{}-view'.format(partial)
     return reverse(viewname, kwargs={
         "spontOrLong": self.kwargs['spontOrLong'],
         'full_team_id': self.kwargs["full_team_id"],
@@ -108,7 +112,7 @@ def getPastSubmissionsInAllCompets(judgeInstance, spontOrLong):
     def _all():
         # type: () -> dict
         if spontOrLong == "spont":
-            return {"Spontaneous": ["TODO:  NOT IMPLEMENTED YET!!!"]}
+            return dict([_one(Spont)])
         else:
             return dict(map(_one, ALL_EXCEPT_SPONT))
         
@@ -138,7 +142,13 @@ class PickTeamIdView(LoginRequiredMixin, FormView):
         # we know it's a valid team id, so we can parse it safely
         grade, comp_type, team_id_number = full_team_id.split(".")
         gct = grade + "." + comp_type
+        spontOrLong = self.kwargs['spontOrLong']
 
-        url = "steamify:{}-add".format(gct)
+        # This is bad url design :-/ but I don't want to refactor everything this late in the game
+        if spontOrLong == "spont":
+            url = "steamify:spont-add"
+        else:
+            url = "steamify:{}-add".format(gct)
+
         return HttpResponseRedirect(reverse(url,
-                kwargs={'spontOrLong': self.kwargs['spontOrLong'], 'full_team_id': full_team_id}))
+                kwargs={'spontOrLong': spontOrLong, 'full_team_id': full_team_id}))

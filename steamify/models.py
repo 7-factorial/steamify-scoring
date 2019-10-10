@@ -105,7 +105,7 @@ class Shared(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return "Score entry for {} (TODO: NEED TEAM ID) judged by {}".format(self.TLA, self.judge)
+        return "Score: {}, {} (BehindTheScenesID={})".format(self.judge, self.team.dotted_id, self.pk)
     
     def get_absolute_url(self):
         # type: (...) -> str
@@ -130,8 +130,6 @@ class Shared(models.Model):
     # In fact, here's a way to do that:
     # I (Jaime) will have a status page for myself which every 20 seconds sends a json request
     # that will trigger the double-entry check and give some other status stuff (not yet decided what the other status stuff is).
-
-    # probably TODO: pub_date = models.DateTimeField('date published')
 
 
 # each instance of this will be a single score submission by one judge
@@ -170,9 +168,7 @@ class VisualArtsMiddle(Shared):
 
 class VisualArtsElem(Shared):
     TLA = "E.VA"
-    artistic_artsyness = models.IntegerField(
-        choices=labeledRangeTuple(),
-        help_text="Are they artsy? OR Fartsy?")
+    artistic_artsyness = standardSteamifyField("""Are they artsy? OR Fartsy?""")
 
 
 class AeroMiddle(Shared):
@@ -213,14 +209,17 @@ class TheaterElem(Shared):
 
 
 # TODO: is there a spont middle and a spont elem rubric?
-# TODO: This might need to inherit from `Shared`, that is `class Spont(Shared)`
-class Spont():
-    # TLA =   
+class Spont(Shared):
+    TLA = "FAKE_TLA_FOR_SPONT"
     # # There shouldn't be a TLA for Spont because all teams have another category; 
     #  BUT TODO: I need to check where TLA is used to make sure I don't assume 1-to-1 
     # and therefore break Spont
     spontOrLong = "spont"
-    pass
+    specific_to_spontaneous = standardSteamifyField("""
+    Words about things.
+    This also says this.
+    """)
+
 
 
 # VERIFIED 2019 Oct 7 at 5:02 pm - this contains all competitions
@@ -230,4 +229,4 @@ ALL_EXCEPT_SPONT = [EngMiddle, EngElem, VisualArtsMiddle, VisualArtsElem,
                     TheaterElem]  # type: List[Type[Shared]]
 
 # TODO: add spont if it ends up being useful
-ALL_COMPETS = ALL_EXCEPT_SPONT  #  + [Spont]
+ALL_COMPETS = ALL_EXCEPT_SPONT + [Spont]

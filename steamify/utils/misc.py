@@ -10,5 +10,9 @@ def score_instance_to_dict(instance):
 
 def makeEditLink(tla, revkwargs):
     # type: (str, dict) -> str
-    editname = 'steamify:{}-edit'.format(tla)
+    if tla == "FAKE_TLA_FOR_SPONT":
+        partial = "spont"
+    else:
+        partial = tla
+    editname = 'steamify:{}-edit'.format(partial)
     return reverse(editname, kwargs=revkwargs)
