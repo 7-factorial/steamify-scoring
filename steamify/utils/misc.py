@@ -5,11 +5,11 @@ from django.urls import reverse
 
 shared_fields_to_exlude_in_user_forms = ["judge", "team", "created_at", "modified_at"]
 
-__expanded_excluded = ["id", "shared_ptr"] + shared_fields_to_exlude_in_user_forms
+_expanded_excluded = ["id", "shared_ptr"] + shared_fields_to_exlude_in_user_forms
 
 def score_instance_to_dict(instance):
     """model_to_dict with appropriate fields excluded."""
-    return model_to_dict(instance, exclude=__expanded_excluded)
+    return model_to_dict(instance, exclude=_expanded_excluded)
 
 
 def makeEditLink(tla, revkwargs):
