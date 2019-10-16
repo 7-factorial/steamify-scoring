@@ -1,5 +1,6 @@
 {% extends "steamify/base.html" %}
 
+{% load static %}
 {% load crispy_forms_tags %}
 
 {% block content %}
@@ -20,7 +21,11 @@
         
     </p>
     <p>
-        <em>Descriptions are provided for a score of <b>3</b> (&quot;Meets Standards&quot;).</em><br/>
+        <div style="max-width: 400px;">
+            <img src="{% static "steamify/img/score_legend.png" %}" alt="Image: legend of 1 through 5">
+        </div>
+        <br/>
+        <em>Descriptions shown below are for a score of <b>3</b> (&quot;Meets Standards&quot;).</em><br/>
     </p>
     <div class="main-content">
         <div class="rubric-questions">
