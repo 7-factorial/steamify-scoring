@@ -1,6 +1,34 @@
-ctrl shift f 'exclude' and centralize that
+relevant:
 
-TEST MORE WHAT I JUST CHANGED, then commit.
+  
+THEN WRITE THE SCRIPT!!   https://docs.google.com/document/d/1lgYSdxjD6gzoF2JKHOFPftGVMem2jJyc0VEP-TQgbAM/edit#
+
+
+
+If I play with the margin / padding / etc on the radio buttons,
+then it can all be in a line. I also would like to figure out how to 
+remove the "----------" choice (I think it's called the blank_choice)
+and instead have no default selected. Most likely I'll be making 
+a custom widget but we'll see.
+
+Then I'd like to label right below the buttons:
+1      2      3     4      5
+aproaching  meets      exceeds
+Probably do this in an image at the top of the page
+with the text at a 45 deg angle. That way I can label
+all 5. Maybe have someone else do that part since it's not code.
+
+
+
+If I use flexbox: https://css-tricks.com/equidistant-objects-with-css/  flexbox works great for labels; need to test how it looks on a phone.
+
+I think width is good now with the viewport and max-width things I've done.
+At some point test on an ipad
+
+******************
+USE JAVASCRIPT TO DO THIS FIRST TASK.
+***********************
+I went on a django/python/look-at-definition spree and realized that wasn't the right way to do it.
 
 Put jquery slider BOUND TO SELECT because it gives both options (slider or select)
 I'm pretty sure that the way they do it
@@ -19,6 +47,10 @@ do all things marked TODO
 
 Make edit cutoff dynamic on the day so that I can mark it as closed
 
+if you enter a team name that you've already graded, should I direct to edit?
+
+It would be great to display verbose names instead of attr names on the 'Score Submitted!' page
+but I think that can come after the video for time sake. It doesn't affect usage.
 
 
 if time:
@@ -31,3 +63,22 @@ For averaging, use score_instance_to_dict to get relevant fields.
     of the competitions. The nice thing about assert is that if anything changes
     then it will tell me. 
     Remember that averaging can be one of the final steps. 
+
+AFTER the competiton: I'd like to show my code here: https://stackoverflow.com/questions/31539395/django-use-radio-buttons-instead-of-select-for-form-component
+
+
+
+
+
+
+
+
+
+Old links that I prob don't need:
+  https://stackoverflow.com/questions/7420241/how-to-remove-none-option-in-django-modelform
+
+  https://stackoverflow.com/questions/8798763/django-how-to-remove-the-blank-choice-from-the-choicefield-in-modelform
+  https://docs.djangoproject.com/en/dev/ref/forms/fields/#choicefield
+
+  new widget option:  https://stackoverflow.com/questions/5824037/how-to-get-rid-of-the-bogus-choice-generated-by-radioselect-of-django-form
+  This question is the reverse of my goal: https://stackoverflow.com/questions/14541074/empty-label-choicefield-django
