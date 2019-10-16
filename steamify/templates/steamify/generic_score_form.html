@@ -36,4 +36,32 @@
             </form>
         </div>
     </div>
+    <script>
+        $( function() {
+            $(".control-group input").checkboxradio({
+                icon: false
+            });
+
+            /* var select = $( "select" );
+            select.each(function(index, elem){
+                var slider = $( "<div></div>" ).insertAfter( elem ).slider({
+                    min: 0,
+                    max: 5,
+                    range: "min",
+                    value: elem.selectedIndex + 1,
+                    slide: function( event, ui ) {
+                        elem.selectedIndex = ui.value;  //  - 1;
+                    }
+                });
+
+                $(elem).on( "change", function() {
+                    slider.slider( "value", this.selectedIndex);   //  + 1 );
+                });
+            });
+            
+            $( "select" ).on( "change", function() {
+                slider.slider( "value", this.selectedIndex + 1 );
+            }); */
+        } );
+    </script>
 {% endblock %}

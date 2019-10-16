@@ -33,3 +33,8 @@
 .rubric-questions .help-block {
     display: none;
 }
+
+.ui-checkboxradio-radio-label {
+    padding-left: 13px;
+    padding-right: 13px;
+}
