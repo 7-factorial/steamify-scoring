@@ -16,11 +16,11 @@ from .utils.misc import makeEditLink
 
 def labeledRangeTuple():
     return [
-        (1, "1 (lowest)"),
+        (1, "1"),
         (2, "2"),
-        (3, "3 (meets described standards)"),
+        (3, "3"),
         (4, "4"),
-        (5, "5 (exceeds described standards)")
+        (5, "5")
     ]
 
 
@@ -162,8 +162,8 @@ class EngElem(Shared):
 
 class VisualArtsMiddle(Shared):
     TLA = "M.VA"
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
+    # choice_text = models.CharField(max_length=200)
+    # votes = models.IntegerField(default=0)
 
 
 class VisualArtsElem(Shared):
