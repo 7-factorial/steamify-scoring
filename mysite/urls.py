@@ -20,7 +20,7 @@ from django.shortcuts import redirect
 
 
 def redir_home(request):
-    return redirect("steamify:steamifyhome")
+    return redirect("steamify:entryhome")
 
 
 urlpatterns = [
