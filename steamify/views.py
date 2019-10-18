@@ -16,6 +16,7 @@ from django.forms import modelform_factory
 from .forms import PickTeamIdForm
 
 from .utils.misc import score_instance_to_dict, makeEditLink
+from .utils.dupe import getEntriesIfAlreadyExist, getUnblankStatus
 
 from .models import Team, ALL_EXCEPT_SPONT, Shared, Spont
 
@@ -23,6 +24,23 @@ from .models import Team, ALL_EXCEPT_SPONT, Shared, Spont
 
 class EntryHomeView(LoginRequiredMixin, TemplateView):
     template_name = "steamify/entryhome.html"
+
+
+# TODO: Change from 'LoginRequiredMixin' to admin-only mixin
+class AdminStatusView(LoginRequiredMixin, TemplateView):
+    template_name = 'steamify/adminstatus.html'
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        
+        ## Experimenting, but I don't think this will be the best way to do it.
+        # context['Non_blank_Status'] = getUnblankStatus()
+
+        # TODO: set up a query for dupes (it will of course overlap with the 
+        # non blank status query, but I will handle the non blank first
+        # and the others later)
+        return context
 
 
 def create_and_update_get_success_url(self):
@@ -63,6 +81,17 @@ class GenericCreate(LoginRequiredMixin, CreateView):
         inst = form.instance  # type: Shared 
         inst.judge = self.request.user
         inst.team = getTeamFromReq(self.request)
+
+        ## Experimenting... I don't think this will end up being the best way to do it though.
+        # inst.status_for_admin = ""
+        # oldEntries = getEntriesIfAlreadyExist(inst)
+        # if oldEntries:
+        #     for ent in oldEntries:
+        #         ent.status_for_admin = "probably_should_delete"
+        #         ent.save()
+        #     inst.status_for_admin = "probably_should_supersede_older_entry"
+        #     # inst is saved later
+
         return super().form_valid(form)
 
 

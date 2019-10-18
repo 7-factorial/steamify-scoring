@@ -94,6 +94,14 @@ class Shared(models.Model):
         )
     created_at = models.DateTimeField()
     modified_at = models.DateTimeField(null=True)
+    # status_for_admin = models.CharField(max_length=200,
+    #             blank=True,
+    #             choices=[("", ""), 
+    #                      ("checked", "checked"),
+    #                      ("todo", "todo"),
+    #                      ("probably_should_delete", "probably_should_delete"),
+    #                      ("probably_should_supersede_older_entry", "probably_should_supersede_older_entry") 
+    #                      ])
 
     def save(self, *args, **kwargs):
         """On save, update timestamps"""
