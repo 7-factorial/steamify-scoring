@@ -40,7 +40,7 @@
   <p><em>Your submission:</em></p> 
   <p>   
   {% for attrnam, attrvalu in serial_keys_vals.items %}
-    <b>{{ attrnam }}</b>: {{ attrvalu }} <br />
+    <b>{{ attrnam|capfirst }}</b>: {{ attrvalu }} <br />
   {% endfor %}
   <a class="btn" href="{{ premade_edit_link }}">Edit</a>
   </p>
