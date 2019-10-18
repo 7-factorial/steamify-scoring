@@ -1,19 +1,19 @@
 from django.urls import path
 
-from django import db
+from .utils.faketypes import ModelField
 
 from django.views.generic import TemplateView
 
 from . import views
 from .views import GenericCreate, PickTeamIdView, GenericDetail, GenericUpdate, EntryHomeView
 from .models import ALL_EXCEPT_SPONT, Spont, Shared
-from .utils.misc import shared_fields_to_exlude_in_user_forms
+from .utils.misc import shared_fields_to_exlude_in_user_forms, getUserDisplayedAttrs
 from django.forms import modelform_factory, RadioSelect
 from django import forms
 from django.forms.widgets import Input
-from typing import List, Callable, Type, Dict, Set, Tuple, Any
+from typing import List, Callable, Type, Dict, Set, Tuple, Any, NewType
 
-
+# idk if this is needed; it was in the tutorial
 app_name = 'steamify'
 
 urlpatterns = [
@@ -27,23 +27,14 @@ urlpatterns = [
 ]  # type: List[Callable]
 
 
-def _getUserDisplayedAttrs(ModelClass):
-    # type: (Type[Shared]) -> Set[str]
-    names = {x.name for x in ModelClass._meta.get_fields()}  # type: Set[str]
-    return names - {"id", "shared_ptr"} - set(shared_fields_to_exlude_in_user_forms)
-    # the next two commented lines are from an older attempt.
-    # widgets = dict((nam, RadioSelect) for nam in namesForDict)  # type: Dict[str, Input]
-    # return widgets
-
-
 def run_as_view(ViewClass, ModelClass):
     # type: (Type[Any], Type[Shared]) -> Any
-    keepers = _getUserDisplayedAttrs(ModelClass)
+    keepers = getUserDisplayedAttrs(ModelClass)
     
     # This took me a little while to figure out, so I posted it on StackOverflow:
     # https://stackoverflow.com/questions/58383617/django-how-to-specify-include-blank-false-in-modelform-factory-using-formf/
     def formfield_callback(f, **kwargs):
-        # type: (db.models.fields.Field, dict) -> forms.Field
+        # type: (ModelField, dict) -> forms.Field
         if f.name in keepers:
             kwargs['choices'] = f.get_choices(include_blank=False)
             kwargs['widget'] = RadioSelect

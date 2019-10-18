@@ -7,7 +7,6 @@ from django.utils import timezone
 # Create your models here.
 from django.urls import reverse
 
-from .utils.misc import makeEditLink
 
 
 # def rangeTuple(start, endInclusive):
@@ -108,8 +107,8 @@ class Shared(models.Model):
         return "Score: {}, {} (BehindTheScenesID={})".format(self.judge, self.team.dotted_id, self.pk)
     
     def get_absolute_url(self):
-        # type: (...) -> str
-        # TODO (I think this works, but a bit more testing would be nice)
+        # type: (Shared) -> str
+        from .utils.misc import makeEditLink  # avoid circular import
         return makeEditLink(self.TLA, {
             'spontOrLong': self.spontOrLong,
             'full_team_id': self.team.dotted_id,
