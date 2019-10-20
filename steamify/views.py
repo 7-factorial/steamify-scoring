@@ -16,7 +16,7 @@ from django.forms import modelform_factory
 from .forms import PickTeamIdForm
 
 from .utils.misc import score_instance_to_dict, makeEditLink
-from .utils.dupe import getEntriesIfAlreadyExist, getUnblankStatus
+from .utils.dupe import getEntriesIfAlreadyExist
 
 from .models import Team, ALL_EXCEPT_SPONT, Shared, Spont
 
