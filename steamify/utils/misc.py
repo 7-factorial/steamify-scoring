@@ -24,9 +24,9 @@ def getUserDisplayedFields(instanceOrClass):
 
 
 def getUserDisplayedAttrs(instanceOrClass):
-    # type: (Union[Type[Shared], Shared]) -> Set[str]
+    # type: (Union[Type[Shared], Shared]) -> List[str]
     fds = getUserDisplayedFields(instanceOrClass)
-    return {x.name for x in fds}
+    return [x.name for x in fds]
     
     # these are filtered earlier now.
     # return names - {"id", "shared_ptr"} - set(shared_fields_to_exlude_in_user_forms)
@@ -35,7 +35,7 @@ def getUserDisplayedAttrs(instanceOrClass):
     # widgets = dict((nam, RadioSelect) for nam in namesForDict)  # type: Dict[str, Input]
     # return widgets
 
-assert getUserDisplayedAttrs(EngMiddle) == {"presentation", "design_notebook", "engineering_design_prototype_working_model", "engineering_statement"}
+assert getUserDisplayedAttrs(EngMiddle) == ["presentation", "design_notebook", "engineering_design_prototype_working_model", "engineering_statement"]
 # TODO: a test for spont
 
 def score_instance_to_dict(instance):
