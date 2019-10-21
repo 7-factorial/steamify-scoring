@@ -7,7 +7,7 @@ import os
 
 
 def readOneFile(fpath):
-    with open(fpath) as f:
+    with open(fpath, encoding="utf_8_sig") as f:
         reader = csv.DictReader(f)
         for line in reader:
             dat = {
@@ -15,8 +15,11 @@ def readOneFile(fpath):
                 "first_name": line["first_name"].strip(),
                 "last_name": line["last_name"].strip(),
             }
-            dat["password"] = get_judge_pw(dat)
-            User.objects.create_user(**dat)
+            if User.objects.filter(username=dat["username"]).exists():
+                print("username already exists: {}".format(dat["username"]))
+            else:
+                dat["password"] = get_judge_pw(dat)
+                User.objects.create_user(**dat)
 
 
 class Command(BaseCommand):
