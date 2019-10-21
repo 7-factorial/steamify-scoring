@@ -1,22 +1,10 @@
-relevant:
-
-  
-THEN WRITE THE SCRIPT!!   https://docs.google.com/document/d/1lgYSdxjD6gzoF2JKHOFPftGVMem2jJyc0VEP-TQgbAM/edit#
+double check this later maybe --> misc.py line 51
 
 
 
-If I play with the margin / padding / etc on the radio buttons,
-then it can all be in a line. I also would like to figure out how to 
-remove the "----------" choice (I think it's called the blank_choice)
-and instead have no default selected. Most likely I'll be making 
-a custom widget but we'll see.
 
-Then I'd like to label right below the buttons:
-1      2      3     4      5
-aproaching  meets      exceeds
-Probably do this in an image at the top of the page
-with the text at a 45 deg angle. That way I can label
-all 5. Maybe have someone else do that part since it's not code.
+
+
 
 
 
@@ -37,9 +25,9 @@ would gracefully degrade. Now that I have NoScript, I can test it. Everything el
 
 ----------- should be ready for video at this point. ----------------
 
-add 'view old submissions' for spontaneous.
+(Does this work? todo - test) add 'view old submissions' for spontaneous.
 
-See if I need to add anything else to make spont work.
+(come back to this) See if I need to add anything else to make spont work.
 
 put actual rubrics in.
 
@@ -48,10 +36,6 @@ do all things marked TODO
 Make edit cutoff dynamic on the day so that I can mark it as closed
 
 if you enter a team name that you've already graded, should I direct to edit?
-
-It would be great to display verbose names instead of attr names on the 'Score Submitted!' page
-but I think that can come after the video for time sake. It doesn't affect usage.
-
 
 if time:
  - test javascript-less
