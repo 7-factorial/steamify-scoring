@@ -19,13 +19,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'l)!=h=s_%lut(-2z!+7os&#nv&edelef_)-m=2ujq!)$2315jp'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+## SECURITY WARNING: keep the secret key used in production secret!
+from .envconfig import SECRET_KEY, DEBUG, ALLOWED_HOSTS, DATABASES
+# SECRET_KEY = 'l)!=h=s_%lut(-2z!+7os&#nv&edelef_)-m=2ujq!)$2315jp'
+## SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -75,12 +74,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
@@ -107,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/New_York'
 
 USE_I18N = True
 
@@ -124,3 +123,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = "staticfiles/"
 
 CRISPY_TEMPLATE_PACK = "bootstrap"
+
+LOGOUT_REDIRECT_URL = "/"

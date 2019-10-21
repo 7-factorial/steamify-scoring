@@ -2,12 +2,12 @@ from django.contrib import admin
 
 # Register your models here.
 
-# from .models import Question, Choice
-# admin.site.register(Question)
-# admin.site.register(Choice)
 
 # Not sure if we'll use this approach.
-# from .models import EngMiddle, Shared, VisualArtsMiddle
+from .models import ALL_COMPETS, Team   # , Shared, VisualArtsMiddle
 
-# admin.site.register(EngMiddle)
+for comp in ALL_COMPETS:
+    admin.site.register(comp)
+admin.site.register(Team)
+
 # admin.site.register(VisualArtsMiddle)

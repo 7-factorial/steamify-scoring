@@ -1,0 +1,8 @@
+{% extends "steamify/base.html" %}
+
+{% block content %}
+    <p class="steamify-breadcrumb">
+        <a href="{% url 'steamify:steamifyhome' %}"><i class="icon-home"></i> </a>
+    </p>
+    <a href="{% url 'steamify:entryhome' %}">Enter scores</a>
+{% endblock %}

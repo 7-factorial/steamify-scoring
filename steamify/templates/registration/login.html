@@ -1,0 +1,17 @@
+{% extends "steamify/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<p class="steamify-breadcrumb">
+    <a href="{% url 'steamify:steamifyhome' %}"><i class="icon-home"></i> </a>
+    &gt; 
+    <b>Login</b>
+</p>
+<form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Log in" class="btn">
+</form>
+
+{% endblock %}

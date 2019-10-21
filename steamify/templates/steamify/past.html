@@ -1,0 +1,36 @@
+<h3>Your past submissions:</h3>
+
+{% if past_submissions %}
+    {% for compet_name, compet_entries in past_submissions.items %}
+        {% if compet_entries %}
+
+            <div style="margin-left: 10px;"><h4>{{ compet_name }}: </h4></div>
+
+            <table style="margin-left: 15px;" class="table">
+                <thead>
+                    <tr>
+                        <th>Submit time</th>
+                        <th>Team</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for centry in compet_entries %}
+                        <tr>
+                            <td style="padding-right:10px; width:70px;">
+                                {{ centry.created_at | date:"f A" }}
+                            </td>
+                            <td><a href="{{ centry.get_absolute_url }}">
+                                {{ centry.team }}
+                            </a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <p>No submissions yet.</p>
+{% endif %}
+        

@@ -1,0 +1,68 @@
+double check this later maybe --> misc.py line 51
+
+
+
+
+
+
+
+
+
+If I use flexbox: https://css-tricks.com/equidistant-objects-with-css/  flexbox works great for labels; need to test how it looks on a phone.
+
+I think width is good now with the viewport and max-width things I've done.
+At some point test on an ipad
+
+******************
+USE JAVASCRIPT TO DO THIS FIRST TASK.
+***********************
+I went on a django/python/look-at-definition spree and realized that wasn't the right way to do it.
+
+Put jquery slider BOUND TO SELECT because it gives both options (slider or select)
+I'm pretty sure that the way they do it
+ ( https://jqueryui.com/slider/#hotelrooms )
+would gracefully degrade. Now that I have NoScript, I can test it. Everything else that I've done so far degraded gracefully.
+
+----------- should be ready for video at this point. ----------------
+
+(Does this work? todo - test) add 'view old submissions' for spontaneous.
+
+(come back to this) See if I need to add anything else to make spont work.
+
+put actual rubrics in.
+
+do all things marked TODO
+
+Make edit cutoff dynamic on the day so that I can mark it as closed
+
+if you enter a team name that you've already graded, should I direct to edit?
+
+if time:
+ - test javascript-less
+ - test on iphone and a few androids
+ - (not very important) Just before competition - make sure team ids and names are good
+
+For averaging, use score_instance_to_dict to get relevant fields.
+    Use assert to verify that it's averaging the expected fields for at least 2 (but ideally all)
+    of the competitions. The nice thing about assert is that if anything changes
+    then it will tell me. 
+    Remember that averaging can be one of the final steps. 
+
+AFTER the competiton: I'd like to show my code here: https://stackoverflow.com/questions/31539395/django-use-radio-buttons-instead-of-select-for-form-component
+
+
+
+
+
+
+
+
+
+Old links that I prob don't need:
+  https://stackoverflow.com/questions/7420241/how-to-remove-none-option-in-django-modelform
+
+  https://stackoverflow.com/questions/8798763/django-how-to-remove-the-blank-choice-from-the-choicefield-in-modelform
+  https://docs.djangoproject.com/en/dev/ref/forms/fields/#choicefield
+
+  new widget option:  https://stackoverflow.com/questions/5824037/how-to-get-rid-of-the-bogus-choice-generated-by-radioselect-of-django-form
+  This question is the reverse of my goal: https://stackoverflow.com/questions/14541074/empty-label-choicefield-django

@@ -1,0 +1,40 @@
+.steamify-login-state {
+    background-color: #ccc;
+    padding:5px;
+}
+
+.steamify-breadcrumb a {
+    color: #c80;
+}
+
+.steamify-breadcrumb {
+    background-color: aliceblue;
+    padding: 5px;
+}
+
+.steamify-logo {
+    padding: 5px;
+    width: 150px;
+}
+
+.main-content {
+    padding: 5px;
+}
+
+.rubric-questions .control-group {
+    padding-top: 10px;
+    border-top: 1px solid #777;
+}
+
+.control-label {
+    font-weight: bold;
+}
+
+.rubric-questions .help-block {
+    display: none;
+}
+
+.ui-checkboxradio-radio-label {
+    padding-left: 13px;
+    padding-right: 13px;
+}

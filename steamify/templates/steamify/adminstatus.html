@@ -1,0 +1,15 @@
+{% extends "steamify/base.html" %}
+
+{% block content %}
+    <hr />
+    <h2>Non_blank_Status:</h2>
+    <h3>(this isn't currently functional b/c I'm going to take a diff approach)</h3>
+    {% for cname, cdat in Non_blank_Status.items %}
+        {{ cname }} : 
+        <ul>
+        {% for el in cdat %}
+            <li><a href="TODO - link to admin edit">{{ el }}</a></li>
+        {% endfor %}
+        </ul>
+    {% endfor %}        
+{% endblock %}

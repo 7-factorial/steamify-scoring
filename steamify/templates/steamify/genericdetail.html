@@ -1,13 +1,54 @@
-{% for attrnam, attrvalu in serial_keys_vals.items %}
-  {{ attrnam }}: {{ attrvalu }} <br />
-{% endfor %}
+{% extends "steamify/base.html" %}
+
+{% block content %}
+  <p class="steamify-breadcrumb">
+      <a href="{% url 'steamify:steamifyhome' %}"><i class="icon-home"></i> </a>
+      &gt;        
+      <a href="{% url 'steamify:entryhome' %}">Score Entry</a>
+      &gt;
+      <a href="{% url 'steamify:pickteamname' view.kwargs.spontOrLong %}">
+          {% if view.kwargs.spontOrLong == "spont" %}
+              Spontaneous 
+          {% else %}
+              Long Problem
+          {% endif %}
+      </a>
+      &gt;
+      <a href="{{ premade_edit_link }}">
+          {{ team }}
+      </a>
+      &gt;
+      Confirmation
+      
+  </p>
+
+  <h3 style="color: #1c0">Score submitted!</h3>
+  <p>
+      <a class="btn" href="{% url 'steamify:pickteamname' view.kwargs.spontOrLong %}">
+        <!-- <i class="icon-plus-sign"></i> Enter another score -->
+        Go to score entry home
+      </a>
+      {% comment %}
+      {% if view.kwargs.spontOrLong == "spont" %}
+                spontaneous 
+            {% else %}
+                long problem
+            {% endif %}
+      {% endcomment %}
+  </p>
+  <hr />
+  <p><em>Your submission:</em></p> 
+  <p>   
+  {% for attrnam, attrvalu in serial_keys_vals.items %}
+    <b>{{ attrnam|capfirst }}</b>: {{ attrvalu }} <br />
+  {% endfor %}
+  <a class="btn" href="{{ premade_edit_link }}">Edit</a>
+  </p>
 
 
 
+  <!-- <p><a href="{ % url 'steamify:engmid-list' % }">back to list</a> </p>   -->
 
+  <!--This works, but we only want to allow editing if we can restrict it to the submitter.-->
 
-<!-- <p><a href="{ % url 'steamify:engmid-list' % }">back to list</a> </p>   -->
-
-<!--This works, but we only want to allow editing if we can restrict it to the submitter.-->
-
-<p><a href="{{ premade_edit_link }}">edit</a> </p>
+{% endblock %}

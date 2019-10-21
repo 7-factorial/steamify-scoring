@@ -14,9 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import include, path
+from django.shortcuts import redirect
+
+
+def redir_home(request):
+    return redirect("steamify:entryhome")
+
 
 urlpatterns = [
+    path('', redir_home),
     path('steamify/', include('steamify.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
