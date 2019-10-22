@@ -1,35 +1,8 @@
-double check this later maybe --> misc.py line 51
-
-
-
-
-
-
-
-
-
-If I use flexbox: https://css-tricks.com/equidistant-objects-with-css/  flexbox works great for labels; need to test how it looks on a phone.
-
-I think width is good now with the viewport and max-width things I've done.
-At some point test on an ipad
-
-******************
-USE JAVASCRIPT TO DO THIS FIRST TASK.
-***********************
-I went on a django/python/look-at-definition spree and realized that wasn't the right way to do it.
-
-Put jquery slider BOUND TO SELECT because it gives both options (slider or select)
-I'm pretty sure that the way they do it
- ( https://jqueryui.com/slider/#hotelrooms )
-would gracefully degrade. Now that I have NoScript, I can test it. Everything else that I've done so far degraded gracefully.
-
------------ should be ready for video at this point. ----------------
-
 (Does this work? todo - test) add 'view old submissions' for spontaneous.
 
 (come back to this) See if I need to add anything else to make spont work.
 
-put actual rubrics in.
+put actual spont rubric in.
 
 do all things marked TODO
 
@@ -47,6 +20,15 @@ For averaging, use score_instance_to_dict to get relevant fields.
     of the competitions. The nice thing about assert is that if anything changes
     then it will tell me. 
     Remember that averaging can be one of the final steps. 
+
+
+probably don't need these notes, but keeping in case:
+    If I use flexbox: https://css-tricks.com/equidistant-objects-with-css/  flexbox works great for labels; need to test how it looks on a phone.
+
+    I think width is good now with the viewport and max-width things I've done.
+    At some point test on an ipad
+
+
 
 AFTER the competiton: I'd like to show my code here: https://stackoverflow.com/questions/31539395/django-use-radio-buttons-instead-of-select-for-form-component
 
