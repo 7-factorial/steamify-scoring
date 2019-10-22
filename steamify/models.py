@@ -1,16 +1,27 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.html import format_html
-from typing import List, Type
+from typing import List, Type, Iterable
 from django.utils import timezone
 
 # Create your models here.
 from django.urls import reverse
+import attr
 
+
+@attr.s
+class AvgAndCount:
+    avg = attr.ib()  # type: float
+    count = attr.ib()  # type: int
 
 
 # def rangeTuple(start, endInclusive):
 #     return [(x, str(x)) for x in range(start, endInclusive + 1)]
+
+def mean(lis):
+    # type: (Iterable[float]) -> float
+    al = list(lis)
+    return sum(al) / len(al)
 
 
 def labeledRangeTuple():
@@ -23,12 +34,6 @@ def labeledRangeTuple():
     ]
 
 
-def standardSteamifyField(help_text_unproc, verbose_name=None):
-    return models.IntegerField(
-        choices=labeledRangeTuple(),
-        help_text=htmlListify(help_text_unproc),
-        verbose_name=verbose_name)
-    
 
 def htmlListify(rawstr):
     # type: (str) -> str
@@ -38,6 +43,15 @@ def htmlListify(rawstr):
     with_lis = "\n".join(format_html("<li>{}</li>", x) for x in noEmpties)
     return "<ul>{}</ul>".format(with_lis)
 
+
+def standardSteamifyField(help_text_unproc, verbose_name=None, help_text_proc_func=htmlListify):
+    return models.IntegerField(
+        choices=labeledRangeTuple(),
+        help_text=help_text_proc_func(help_text_unproc),
+        verbose_name=verbose_name)
+    
+
+    
 
 def verify_team_id_before_creating(teamObj):
     # type: (Team) -> None
@@ -61,6 +75,15 @@ def verify_team_id_before_creating(teamObj):
         pass  # The good case is not finding a team with that number.
     else:
         raise ValueError("The numerical portion '{}' already exists: '{}'. All numbers must be unique".format(numericalpart, existing.dotted_id))    
+
+
+class AllowedDevice(models.Model):
+
+    # possibility for multiple allowed devices 
+    judge = models.ForeignKey(
+                get_user_model(),
+                on_delete=models.PROTECT)
+    id = models.CharField(max_length=100, primary_key=True)
 
 
 class Team(models.Model):
@@ -121,7 +144,7 @@ class Shared(models.Model):
             'spontOrLong': self.spontOrLong,
             'full_team_id': self.team.dotted_id,
             'pk': self.pk})
-
+    
 
     # maybe TODO? add grade_and_category
 
@@ -527,6 +550,7 @@ class TheaterElem(Shared):
         Statement includes description of team work, but each member’s role is not clear.
         """)
 
+_identFunc = lambda x: x
 
 class Spont(Shared):
     TLA = "FAKE_TLA_FOR_SPONT"
@@ -535,10 +559,34 @@ class Spont(Shared):
     # and therefore break Spont
     # # TODO add rubric
     spontOrLong = "spont"
-    specific_to_spontaneous = standardSteamifyField("""
-    Words about things.
-    This also says this.
-    """)
+    focus_on_the_task = standardSteamifyField("""
+        <ul>
+            <li>Almost all team members (one person did not fulfill one of the following):
+                <ul>
+                    <li>Stay on task all of the time without reminders.</li>
+                    <li>Work hard and helps others in the group.</li>
+                    <li>Gather information and shares useful ideas for discussions.</li>
+                </ul>
+            </li>
+        </ul>""",
+        help_text_proc_func=_identFunc)
+    
+    listening_questioning_discussing = standardSteamifyField("""
+        Respectfully listens, discusses and asks questions.""",
+        verbose_name="Listening, questioning, discussing")
+    
+    teamwork = standardSteamifyField("""
+        <ul><li>Almost all team members (one person did not fulfill one of the following):
+            <ul>
+                <li>Contributed equally to the finished project.</li>
+                <li>Worked until the end of the task.</li>
+                <li>Actively seek and suggest solutions to problems.</li>
+            </ul>
+        </li></ul>
+        """,
+        help_text_proc_func=_identFunc)
+
+    success_in_problem_resolution = standardSteamifyField("""The problem was almost resolved.""")
 
 
 
