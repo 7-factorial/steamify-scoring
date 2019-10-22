@@ -5,7 +5,7 @@ import os
 
 
 def readOneFile(fpath):
-    with open(fpath) as f:
+    with open(fpath, encoding="utf_8_sig") as f:
         reader = csv.DictReader(f)
         for line in reader:
             Team.objects.create(
