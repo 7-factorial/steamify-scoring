@@ -34,7 +34,15 @@
     display: none;
 }
 
+.rubric-questions .control-label {
+    font-size: 16px;
+}
+
 .ui-checkboxradio-radio-label {
     padding-left: 13px;
     padding-right: 13px;
+}
+
+.asteriskField {
+    display: none;
 }
