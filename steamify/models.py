@@ -100,6 +100,15 @@ class Team(models.Model):
 
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
+    def get_attached_Shared_type(self):
+        # type: (...) -> Type[Shared]
+        from .utils.misc import tla_from_fullId
+        team_tla = tla_from_fullId(self.dotted_id)
+        for Compet in ALL_EXCEPT_SPONT:
+            if Compet.TLA.upper() == team_tla.upper():
+                return Compet
+        raise ValueError("Could not find a competition for that TeamID.")
+
 
 class Shared(models.Model):
     # something_shared = models.IntegerField(
@@ -145,6 +154,11 @@ class Shared(models.Model):
             'full_team_id': self.team.dotted_id,
             'pk': self.pk})
     
+    def avg_judge_submission(self):
+        # type: (Shared) -> Averagable
+        from .utils.misc import getUserDisplayedAttrs  # avoid circular import
+        fns = getUserDisplayedAttrs(self)
+        return Averagable([getattr(self, fn) for fn in fns])  # AvgAndCount(avg=mean(vals), count=len(vals))
 
     # maybe TODO? add grade_and_category
 
