@@ -35,6 +35,10 @@ def labeledRangeTuple():
 
 
 
+def prependstuff(stuff):
+    return "</p><p style='margin-bottom:0px; color:#777;'><em>Example of a score of <b>3</b>:</em></p>{}".format(stuff)
+
+
 def htmlListify(rawstr):
     # type: (str) -> str
     spl = rawstr.splitlines()
@@ -47,7 +51,7 @@ def htmlListify(rawstr):
 def standardSteamifyField(help_text_unproc, verbose_name=None, help_text_proc_func=htmlListify):
     return models.IntegerField(
         choices=labeledRangeTuple(),
-        help_text=help_text_proc_func(help_text_unproc),
+        help_text=prependstuff(help_text_proc_func(help_text_unproc)),
         verbose_name=verbose_name)
     
 
