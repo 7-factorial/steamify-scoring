@@ -9,7 +9,7 @@ from django.contrib import auth
 from django import db
 from typing import Tuple, Optional
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 import json
 
 from django.forms import modelform_factory
@@ -32,9 +32,13 @@ def allEntries():
     return dict(map(data, ALL_COMPETS))
     
 
-# TODO: Change from 'LoginRequiredMixin' to admin-only mixin
-class AdminStatusView(LoginRequiredMixin, TemplateView):
+class AdminStatusView(UserPassesTestMixin, TemplateView):
     template_name = 'steamify/adminstatus.html'
+
+    def test_func(self):
+        user = self.request.user
+        # probably unnecessarily redundant
+        return user.is_staff and user.is_superuser
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
