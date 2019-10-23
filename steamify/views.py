@@ -18,13 +18,19 @@ from .forms import PickTeamIdForm
 from .utils.misc import score_instance_to_dict, makeEditLink
 from .utils.dupe import getEntriesIfAlreadyExist
 
-from .models import Team, ALL_EXCEPT_SPONT, Shared, Spont
+from .models import Team, ALL_EXCEPT_SPONT, Shared, Spont, ALL_COMPETS
 
 
 
 class EntryHomeView(LoginRequiredMixin, TemplateView):
     template_name = "steamify/entryhome.html"
 
+
+def allEntries():
+    def data(Compet):
+        return Compet.__name__, list(Compet.objects.all())
+    return dict(map(data, ALL_COMPETS))
+    
 
 # TODO: Change from 'LoginRequiredMixin' to admin-only mixin
 class AdminStatusView(LoginRequiredMixin, TemplateView):
@@ -36,6 +42,8 @@ class AdminStatusView(LoginRequiredMixin, TemplateView):
         
         ## Experimenting, but I don't think this will be the best way to do it.
         # context['Non_blank_Status'] = getUnblankStatus()
+
+        context['all_the_things'] = allEntries()
 
         # TODO: set up a query for dupes (it will of course overlap with the 
         # non blank status query, but I will handle the non blank first
