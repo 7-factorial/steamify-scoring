@@ -56,3 +56,10 @@ def makeEditLink(tla, revkwargs):
         partial = tla
     editname = 'steamify:{}-edit'.format(partial)
     return reverse(editname, kwargs=revkwargs)
+
+
+
+def tla_from_fullId(dotid):
+    # type: (str) -> str
+    gradeletter, subject, numericalpart = dotid.split(".")
+    return gradeletter + "." + subject
