@@ -1,6 +1,38 @@
 {% extends "steamify/base.html" %}
+{% load static %}
+
+{% block extrahead %}
+<!-- choose a theme file -->
+<link rel="stylesheet" href="{% static 'steamify/tablesorter-master/theme.blue.css' %}">
+<!-- load jQuery and tablesorter scripts -->
+{# taken care of elsewhere  <script type="text/javascript" src="/path/to/jquery-latest.js"></script> #}
+<script type="text/javascript" src="{% static 'steamify/tablesorter-master/jquery.tablesorter.js' %}"></script>
+
+<!-- tablesorter widgets (optional) -->
+<script type="text/javascript" src="{% static 'steamify/tablesorter-master/jquery.tablesorter.widgets.js' %}"></script>
+{% endblock %}
+
 
 {% block content %}
+    <h2> All Teams </h2>
+    <table style="margin-left:50px;" class="tablesorter-blue usets">
+    <thead><tr>
+        <th>TeamId</th>
+        <th>Long</th>
+        <th>Spont</th>
+        <th>Both</th>
+    </tr></thead>
+    <tbody>
+    {% for team in all_team_objects %}
+        <tr>
+            <td>{{ team.dotted_id }}</td>
+            <td>{{ team.lon }}</td>
+            <td>{{ team.spon }}</td>
+            <td>{{ team.both }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
     <hr />
     
      {% for cname, cdat in all_the_things.items %}
@@ -11,4 +43,10 @@
         {% endfor %}
         </ul>
     {% endfor %}
+    
+    <script>
+        $(function() {
+            $(".usets").tablesorter();
+        });
+    </script>
 {% endblock %}
