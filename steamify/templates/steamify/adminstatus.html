@@ -33,9 +33,13 @@
     {% endfor %}
     </tbody>
     </table>
+
+
     <hr />
-    
-     {% for cname, cdat in all_the_things.items %}
+
+
+    <h2> All Entries by Category </h2>
+    {% for cname, cdat in all_entries_by_category.items %}
         {{ cname }} : 
         <ul>
         {% for el in cdat %}

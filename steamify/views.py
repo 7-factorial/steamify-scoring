@@ -7,7 +7,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormVi
 from django.core import serializers
 from django.contrib import auth
 from django import db
-from typing import Tuple, Optional
+from typing import Tuple, Optional, Any, Type, List
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 import json
@@ -26,10 +26,30 @@ class EntryHomeView(LoginRequiredMixin, TemplateView):
     template_name = "steamify/entryhome.html"
 
 
-def allEntries():
-    def data(Compet):
+def all_entries_by_category():
+
+    def name_and_dat(Compet):
+        # type: (Type[Shared]) -> Tuple[str, list]
         return Compet.__name__, list(Compet.objects.all())
-    return dict(map(data, ALL_COMPETS))
+
+    return dict(map(name_and_dat, ALL_COMPETS))
+    
+
+def precalcTeam(team):
+    # type: (Team) -> dict
+    dat = team.three_averages()
+    dat.update({
+        "dotted_id": team.dotted_id,
+    })
+    return dat
+
+## Didn't need this because of js tablesorter
+# def orderTeams(teams):
+#     # type: (List[dict]) -> List[dict]
+#     def keyfunc():
+#         # type: (dict) -> str
+#         fill_this
+#     return sorted(teams, key=keyfunc)
     
 
 class AdminStatusView(UserPassesTestMixin, TemplateView):
@@ -47,7 +67,8 @@ class AdminStatusView(UserPassesTestMixin, TemplateView):
         ## Experimenting, but I don't think this will be the best way to do it.
         # context['Non_blank_Status'] = getUnblankStatus()
 
-        context['all_the_things'] = allEntries()
+        context['all_entries_by_category'] = all_entries_by_category()
+        context['all_team_objects'] = [precalcTeam(x) for x in Team.objects.all()]
 
         # TODO: set up a query for dupes (it will of course overlap with the 
         # non blank status query, but I will handle the non blank first
