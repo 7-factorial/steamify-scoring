@@ -14,9 +14,11 @@
           {% endif %}
       </a>
       &gt;<br/>
-      <a href="{{ premade_edit_link }}">
-          {{ team }}
-      </a>
+      <span style="font-size: 2em;"><a href="{{ premade_edit_link }}">
+            &nbsp;{{ team.dotted_id }}<br/>
+            &nbsp;{{ team.name }}<br/>
+            &nbsp;{{ team.school_name }}
+      </a></span>
       &gt;
       <b>Confirmation</b>
       
