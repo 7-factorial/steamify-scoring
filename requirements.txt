@@ -2,3 +2,4 @@ django~=2.2
 django-crispy-forms==1.7.2
 attrs
 mysqlclient   # note: at time of writing, this does not work on windows unless you jump through some hoops: https://stackoverflow.com/questions/51146117/installing-mysqlclient-in-python-3-6-in-windows
+toolz
