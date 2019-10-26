@@ -1,21 +1,15 @@
-(Does this work? todo - test) add 'view old submissions' for spontaneous.
-
-(come back to this) See if I need to add anything else to make spont work.
-
-put actual spont rubric in.
-
 do all things marked TODO
 
-Make edit cutoff dynamic on the day so that I can mark it as closed
+(skipping) Make edit cutoff dynamic on the day so that I can mark it as closed
 
-if you enter a team name that you've already graded, should I direct to edit?
+(skipping) if you enter a team name that you've already graded, should I direct to edit?
 
 if time:
  - test javascript-less
  - test on iphone and a few androids
  - (not very important) Just before competition - make sure team ids and names are good
 
-For averaging, use score_instance_to_dict to get relevant fields.
+(done ish) For averaging, use score_instance_to_dict to get relevant fields.
     Use assert to verify that it's averaging the expected fields for at least 2 (but ideally all)
     of the competitions. The nice thing about assert is that if anything changes
     then it will tell me. 
