@@ -1,18 +1,53 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from django.utils.html import format_html
-from typing import List, Type, Iterable
+from typing import List, Type, Iterable, Optional, Dict, Any
 from django.utils import timezone
 
 # Create your models here.
 from django.urls import reverse
 import attr
+import toolz
+
 
 
 @attr.s
-class AvgAndCount:
-    avg = attr.ib()  # type: float
-    count = attr.ib()  # type: int
+class WithMeta:
+    val = attr.ib(default=None)   # type: Optional[float]
+    numsubmit = attr.ib(default=None)   # type: Optional[int]
+    meta = attr.ib(default=None)  # type: Optional[str]
+    
+    def __str__(self):
+        # type: (...) -> str
+        if self.meta:
+            return str(self.meta)
+        elif self.val:
+            if self.numsubmit:
+                return "{} ({} subs)".format(self.val, self.numsubmit)
+            else:
+                return str(self.val)
+        else:
+            raise ValueError("No val nor meta")
+
+
+def rnd(x):
+    # type: (float) -> float
+    return round(x, 4)
+
+# @attr.s(frozen=True)
+# class Averagable:
+#     vals = attr.ib()  # type: List[float]
+    
+#     def avg(self):
+#         return mean(self.vals)
+#         ## too fancy
+#         # try:
+#         #     avgs = [x.avg() for x in self.vals]
+#         # except AttributeError as e:
+#         #     # it wasn't averages, so try as normal numbers
+#         #     return mean(self.vals)
+#         # else:
+#         #     return mean(avgs)
 
 
 # def rangeTuple(start, endInclusive):
@@ -55,6 +90,32 @@ def standardSteamifyField(help_text_unproc, verbose_name=None, help_text_proc_fu
         verbose_name=verbose_name)
     
 
+def _judgeMultiSubmit(judgeScores):
+    # Test this
+    judges = [x.judge for x in judgeScores]
+    fs = toolz.frequencies(judges)
+    toomany = toolz.valfilter(lambda num: num > 1, fs)
+    return [judge.username for judge in toomany.keys()]
+    # return len(set(judges)) != len(judges)
+
+
+def avg_multiple_judges(Compet, team):
+    # type: (Type[Shared], Team) -> WithMeta
+    """should work for Spont and all long problems"""
+    # import ipdb; ipdb.set_trace()
+    # if team.dotted_id == "M.AE.305":
+    #     import ipdb; ipdb.set_trace()
+    judgeScores = list(Compet.objects.filter(team=team))
+    judgeAvgs = [x.avg_judge_submission() for x in judgeScores]  # List[float]
+    if len(judgeScores) == 0:
+        return WithMeta(meta="---")
+    # import ipdb; ipdb.set_trace()
+    jms = _judgeMultiSubmit(judgeScores) 
+    if jms:
+        return WithMeta(meta="MultiSubmit: {}".format(jms))     #   Averagable([999999])  # This should stand out.
+    else:
+        return WithMeta(val=mean(judgeAvgs), numsubmit=len(judgeAvgs))
+        
     
 
 def verify_team_id_before_creating(teamObj):
@@ -85,9 +146,30 @@ class AllowedDevice(models.Model):
 
     # possibility for multiple allowed devices 
     judge = models.ForeignKey(
-                get_user_model(),
+                User,
                 on_delete=models.PROTECT)
     id = models.CharField(max_length=100, primary_key=True)
+
+
+
+def avg_long_score(team):
+    # type: (Team) -> WithMeta
+    Compet = team.get_attached_Shared_type()
+    return avg_multiple_judges(Compet, team)
+
+
+def avg_spont_score(team):
+    # type: (Team) -> WithMeta
+    return avg_multiple_judges(Spont, team)
+
+
+def avg_both(lon, spon):
+    # type: (WithMeta, WithMeta) -> WithMeta
+    if lon.val and spon.val:
+        weightavg = (0.8 * lon.val) + (0.2 * spon.val)
+        return WithMeta(val=rnd(weightavg))
+    else:
+        return WithMeta(meta="---")
 
 
 class Team(models.Model):
@@ -113,6 +195,17 @@ class Team(models.Model):
                 return Compet
         raise ValueError("Could not find a competition for that TeamID.")
 
+    def three_averages(self):
+        # type: (...) -> Dict[str, Any]
+        lon = avg_long_score(self)
+        spon = avg_spont_score(self)
+        both = avg_both(lon=lon, spon=spon)
+        return {
+            "lon": lon,
+            "spon": spon,
+            "both": both
+        }
+        
 
 class Shared(models.Model):
     # something_shared = models.IntegerField(
@@ -121,7 +214,7 @@ class Shared(models.Model):
     TLA = "Shared_class_which_only_has_TLA_to_avoid_exceptions"
     spontOrLong = "long"  # override this in spont
     judge = models.ForeignKey(
-        get_user_model(),
+        User,
         on_delete=models.PROTECT,
         )
     team = models.ForeignKey(
@@ -159,12 +252,10 @@ class Shared(models.Model):
             'pk': self.pk})
     
     def avg_judge_submission(self):
-        # type: (Shared) -> Averagable
+        # type: (Shared) -> float
         from .utils.misc import getUserDisplayedAttrs  # avoid circular import
         fns = getUserDisplayedAttrs(self)
-        return Averagable([getattr(self, fn) for fn in fns])  # AvgAndCount(avg=mean(vals), count=len(vals))
-
-    # maybe TODO? add grade_and_category
+        return mean(getattr(self, fn) for fn in fns)  # AvgAndCount(avg=mean(vals), count=len(vals))
 
     # TODO: save must check if there's already an entry for
     #   that judge
@@ -615,4 +706,4 @@ ALL_EXCEPT_SPONT = [EngMiddle, EngElem, VisualArtsMiddle, VisualArtsElem,
                     TheaterElem]  # type: List[Type[Shared]]
 
 # TODO: add spont if it ends up being useful
-ALL_COMPETS = ALL_EXCEPT_SPONT + [Spont]
+ALL_COMPETS = ALL_EXCEPT_SPONT + [Spont]  # type: List[Type[Shared]]
