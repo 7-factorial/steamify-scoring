@@ -3,11 +3,31 @@ from django.contrib.auth.models import User
 from django.utils.html import format_html
 from typing import List, Type, Iterable, Optional, Dict, Any
 from django.utils import timezone
+import secrets
 
 # Create your models here.
 from django.urls import reverse
 import attr
 import toolz
+
+from django.contrib.auth import user_logged_in
+
+
+
+def update_allowed_devices(request):
+    try:
+        import ipdb; ipdb.set_trace()
+        if not request.session.get('steamify_device_id'):
+            devid = secrets.token_hex(6)
+            request.session['steamify_device_id'] = devid
+            request.user.alloweddevice_set.create(id=devid)
+    except Exception as e:
+        print(e)  # oh well.
+
+def boilerplatefunc(sender, request, user, **kwargs):
+    update_allowed_devices(request)
+
+user_logged_in.connect(boilerplatefunc)
 
 
 
@@ -149,6 +169,16 @@ class AllowedDevice(models.Model):
                 User,
                 on_delete=models.PROTECT)
     id = models.CharField(max_length=100, primary_key=True)
+    created_at = models.DateTimeField() 
+
+    def __str__(self):
+        return "{}: {}, {}".format(self.judge.username, self.id, self.created_at)
+    
+    def save(self, *args, **kwargs):
+        """On save, update timestamps"""
+        if self._state.adding:
+            self.created_at = timezone.now()
+        super().save(*args, **kwargs)
 
 
 
