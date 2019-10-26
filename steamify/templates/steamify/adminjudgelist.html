@@ -22,6 +22,7 @@
         <th>lname</th>
         <th>login date</th>
         <th>seconds since last login</th>
+        <th>labels (groups)</th>
     </tr></thead>
     <tbody>
     {% for judge in all_judge_objects %}
@@ -31,6 +32,11 @@
             <td>{{ judge.last_name }}</td>
             <td>{{ judge.last_login|date:"m/d H:i:s" }}</td>
             <td>{{ judge.last_login.timestamp|add:nowdatets }}</td>
+            <td>
+                {% for grou in judge.groups.all %}
+                    {{ grou.name }}
+                {% endfor %}
+            </td>
         </tr>
     {% endfor %}
     </tbody>
