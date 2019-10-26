@@ -23,6 +23,8 @@
         <th>login date</th>
         <th>seconds since last login</th>
         <th>labels (groups)</th>
+        <th>num devices</th>
+        <th>not-yet-approved devices</th>
     </tr></thead>
     <tbody>
     {% for judge in all_judge_objects %}
@@ -36,6 +38,22 @@
                 {% for grou in judge.groups.all %}
                     {{ grou.name }}
                 {% endfor %}
+            </td>
+            <td>
+                {{ judge.alloweddevice_set.all|length }}
+            </td>
+            <td>
+                <ol>
+                {% for devi in judge.alloweddevice_set.all %}
+                    {% if devi.emptyIfNotApproved %}
+                        <li style="padding-bottom:10px;">
+                            {{ devi.created_at.timestamp|add:nowdatets }} <br/>
+                            {{ devi.created_at|date:"m/d H:i:s" }} <br/>
+                            ({{ devi.id }}) 
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                </ol>
             </td>
         </tr>
     {% endfor %}

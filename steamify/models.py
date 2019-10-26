@@ -170,10 +170,22 @@ class AllowedDevice(models.Model):
                 on_delete=models.PROTECT)
     id = models.CharField(max_length=100, primary_key=True)
     created_at = models.DateTimeField() 
+    approved = models.NullBooleanField()
 
     def __str__(self):
-        return "{}: {}, {}".format(self.judge.username, self.id, self.created_at)
+        return "{} {}: {}, {}".format(self.approvedPretty(),
+                    self.judge.username, self.id, self.created_at)
     
+    def approvedPretty(self):
+        return {
+            True:"Approved. ",
+            False:"DENIED! ",
+            None:""
+        }[self.approved]
+
+    def emptyIfNotApproved(self):
+        return "" if self.approved else str(self)
+
     def save(self, *args, **kwargs):
         """On save, update timestamps"""
         if self._state.adding:
