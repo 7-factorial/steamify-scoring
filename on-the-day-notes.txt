@@ -1,0 +1,12 @@
+
+
+I would like another volunteer to help with misc.
+
+Things I'll do:
+ - watch the login time
+ - watch the scores for multisubmit
+
+Things the volunteer could do:
+ - step them through a submission ( fake team: M.DE.999 )
+ - change their password  ( optional: http://nonsense.x2d.org/ )
+ - run to talk to a judge if needed
