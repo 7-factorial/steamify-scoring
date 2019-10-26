@@ -17,6 +17,7 @@
     <h2> All Teams </h2>
     <table class="tablesorter-blue usets">
     <thead><tr>
+        <th>TLA</th>
         <th>TeamId</th>
         <th>Team</th>
         <th>Long</th>
@@ -26,6 +27,7 @@
     <tbody>
     {% for team in all_team_objects %}
         <tr>
+            <td>{{ team.tla }}</td>
             <td>{{ team.dotted_id }}</td>
             <td>{{ team.team_obj }}</td>
             <td>{{ team.lon }}</td>

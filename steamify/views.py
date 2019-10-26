@@ -11,6 +11,8 @@ from django import db
 from typing import Tuple, Optional, Any, Type, List
 from django.utils import timezone
 
+from .utils.misc import tla_from_fullId
+
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 import json
 
@@ -47,6 +49,7 @@ def precalcTeam(team):
     dat.update({
         "dotted_id": team.dotted_id,
         "team_obj": team,
+        "tla": tla_from_fullId(team.dotted_id)
     })
     return dat
 
