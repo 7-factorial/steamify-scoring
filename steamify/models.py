@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.html import format_html
-from typing import List, Type, Iterable, Optional, Dict, Any
+from typing import List, Type, Iterable, Optional, Dict, Any, Union
 from django.utils import timezone
 import secrets
 
@@ -42,6 +42,14 @@ def update_allowed_devices(request):
 # user_logged_in.connect(boilerplatefunc)
 
 
+def nes(x):
+    # type: (Union[None, str, float, int]) -> Union[str, float, int]
+    """None to empty str, other vals unchanged"""
+    if x == None:
+        return ""
+    else:
+        return x  # type: ignore
+
 
 @attr.s
 class WithMeta:
@@ -51,15 +59,25 @@ class WithMeta:
     
     def __str__(self):
         # type: (...) -> str
-        if self.meta:
-            return str(self.meta)
-        elif self.val:
-            if self.numsubmit:
-                return "{} ({} subs)".format(self.val, self.numsubmit)
-            else:
-                return str(self.val)
-        else:
-            raise ValueError("No val nor meta")
+        if self.meta == "---":
+            return "---"
+        
+        # import ipdb; ipdb.set_trace()
+        _val = str(nes(self.val))
+        _numsubmit = " ({} subs)".format(self.numsubmit) if self.numsubmit else ""
+        _meta = " " + str(nes(self.meta))
+        if not (self.val or self.numsubmit or self.meta):
+            raise ValueError("No val, numsubmit, or meta")
+        return _val + _numsubmit + _meta
+        # if self.meta:
+        #     return "{} ({} subs). {}".format(nes(self.val), nes(self.numsubmit), self.meta)
+        # elif self.val:
+        #     if self.numsubmit:
+        #         return "{} ({} subs)".format(self.val, self.numsubmit)
+        #     else:
+        #         return str(self.val)
+        # else:
+        #     raise ValueError("No val nor meta")
 
 
 def rnd(x):
@@ -144,7 +162,9 @@ def avg_multiple_judges(Compet, team):
     # import ipdb; ipdb.set_trace()
     jms = _judgeMultiSubmit(judgeScores) 
     if jms:
-        return WithMeta(meta="MultiSubmit: {}".format(jms))     #   Averagable([999999])  # This should stand out.
+        return WithMeta(meta="MultiSubmit: {}".format(jms),
+                        val=mean(judgeAvgs),
+                        numsubmit=len(judgeAvgs))     #   Averagable([999999])  # This should stand out.
     else:
         return WithMeta(val=mean(judgeAvgs), numsubmit=len(judgeAvgs))
         
