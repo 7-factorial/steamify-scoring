@@ -46,6 +46,7 @@ def precalcTeam(team):
     dat = team.three_averages()
     dat.update({
         "dotted_id": team.dotted_id,
+        "team_obj": team,
     })
     return dat
 

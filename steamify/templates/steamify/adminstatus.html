@@ -18,6 +18,7 @@
     <table class="tablesorter-blue usets">
     <thead><tr>
         <th>TeamId</th>
+        <th>Team</th>
         <th>Long</th>
         <th>Spont</th>
         <th>Both</th>
@@ -26,6 +27,7 @@
     {% for team in all_team_objects %}
         <tr>
             <td>{{ team.dotted_id }}</td>
+            <td>{{ team.team_obj }}</td>
             <td>{{ team.lon }}</td>
             <td>{{ team.spon }}</td>
             <td>{{ team.both }}</td>
