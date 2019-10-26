@@ -16,7 +16,7 @@ from django.contrib.auth import user_logged_in
 
 def update_allowed_devices(request):
     try:
-        import ipdb; ipdb.set_trace()
+        # import ipdb; ipdb.set_trace()
         if not request.session.get('steamify_device_id'):
             devid = secrets.token_hex(6)
             request.session['steamify_device_id'] = devid
