@@ -10,24 +10,36 @@ from django.urls import reverse
 import attr
 import toolz
 
-from django.contrib.auth import user_logged_in
+# from django.contrib.auth import user_logged_in
 
 
 
 def update_allowed_devices(request):
+
+    def newid():
+        devid = secrets.token_hex(6)
+        request.session['steamify_device_id'] = devid
+        request.user.alloweddevice_set.create(id=devid)
+
     try:
         # import ipdb; ipdb.set_trace()
-        if not request.session.get('steamify_device_id'):
-            devid = secrets.token_hex(6)
-            request.session['steamify_device_id'] = devid
-            request.user.alloweddevice_set.create(id=devid)
+        current_devid = request.session.get('steamify_device_id')
+        
+        id_is_in_list_of_ids = request.user.alloweddevice_set.filter(id=current_devid).exists()
+
+        # probably redundant but it works
+        hasIdAndIdIsInList = current_devid and id_is_in_list_of_ids
+
+        if not hasIdAndIdIsInList:
+            newid()
+            
     except Exception as e:
         print(e)  # oh well.
 
-def boilerplatefunc(sender, request, user, **kwargs):
-    update_allowed_devices(request)
+# def boilerplatefunc(sender, request, user, **kwargs):
+    # update_allowed_devices(request)
 
-user_logged_in.connect(boilerplatefunc)
+# user_logged_in.connect(boilerplatefunc)
 
 
 
