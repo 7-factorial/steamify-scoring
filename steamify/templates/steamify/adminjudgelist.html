@@ -1,0 +1,47 @@
+{% extends "steamify/base.html" %}
+{% load static %}
+
+{% block extrahead %}
+<!-- choose a theme file -->
+<link rel="stylesheet" href="{% static 'steamify/tablesorter-master/theme.blue.css' %}">
+<!-- load jQuery and tablesorter scripts -->
+{# taken care of elsewhere  <script type="text/javascript" src="/path/to/jquery-latest.js"></script> #}
+<script type="text/javascript" src="{% static 'steamify/tablesorter-master/jquery.tablesorter.js' %}"></script>
+
+<!-- tablesorter widgets (optional) -->
+<script type="text/javascript" src="{% static 'steamify/tablesorter-master/jquery.tablesorter.widgets.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <h2> All Judge Sign ins </h2>
+    <table class="tablesorter-blue usets">
+    <thead><tr>
+        <th>username</th>
+        <th>fname</th>
+        <th>lname</th>
+        <th>login date</th>
+        <th>seconds since last login</th>
+    </tr></thead>
+    <tbody>
+    {% for judge in all_judge_objects %}
+        <tr>
+            <td>{{ judge.username }}</td>
+            <td>{{ judge.first_name }}</td>
+            <td>{{ judge.last_name }}</td>
+            <td>{{ judge.last_login|date:"m/d H:i:s" }}</td>
+            <td>{{ judge.last_login.timestamp|add:nowdatets }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+
+
+    
+    <script>
+        $(function() {
+            $(".usets").tablesorter();
+        });
+    </script>
+{% endblock %}

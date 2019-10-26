@@ -6,8 +6,10 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 from django.core import serializers
 from django.contrib import auth
+from django.contrib.auth.models import User
 from django import db
 from typing import Tuple, Optional, Any, Type, List
+from django.utils import timezone
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 import json
@@ -51,6 +53,24 @@ def precalcTeam(team):
 #         fill_this
 #     return sorted(teams, key=keyfunc)
     
+
+class AdminJudgeListView(UserPassesTestMixin, TemplateView):
+    template_name = 'steamify/adminjudgelist.html'
+
+    def test_func(self):
+        user = self.request.user
+        # probably unnecessarily redundant
+        return user.is_staff and user.is_superuser
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        
+        context['all_judge_objects'] = User.objects.all()
+        context['nowdatets'] = 0 - timezone.now().timestamp()
+
+        return context
+
 
 class AdminStatusView(UserPassesTestMixin, TemplateView):
     template_name = 'steamify/adminstatus.html'
