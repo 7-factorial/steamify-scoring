@@ -1,4 +1,4 @@
-from ..models import Team, Shared, mean
+from ..models import Team, Shared, mean, Spont
 from enum import Enum
 from typing import List, Dict, Tuple, Iterable
 from .misc import score_instance_to_dict
@@ -12,7 +12,10 @@ class LS(Enum):
 
 def getSubmissions(team, ls):
     # type: (Team, LS) -> List[Shared]
-    Compet = team.get_attached_Shared_type()
+    if ls == LS.LONG:
+        Compet = team.get_attached_Shared_type()
+    else:
+        Compet = Spont
     return list(Compet.objects.filter(team=team))
 
 
