@@ -39,7 +39,7 @@ assert getUserDisplayedAttrs(EngMiddle) == ["presentation", "design_notebook", "
 # TODO: a test for spont
 
 def score_instance_to_dict(instance):
-    # type: (Shared) -> Dict[str, str]
+    # type: (Shared) -> Dict[str, int]
     """Like django's model_to_dict, but using pretty names.
     Excludes fields that aren't relevant to the users (judges)."""
 
