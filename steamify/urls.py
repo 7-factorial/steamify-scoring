@@ -5,7 +5,7 @@ from .utils.faketypes import ModelField
 from django.views.generic import TemplateView
 
 from . import views
-from .views import GenericCreate, PickTeamIdView, GenericDetail, GenericUpdate, EntryHomeView, AdminStatusView, AdminJudgeListView
+from .views import GenericCreate, PickTeamIdView, GenericDetail, GenericUpdate, EntryHomeView, AdminStatusView, AdminJudgeListView, TeamBreakdownView
 from .models import ALL_EXCEPT_SPONT, Spont, Shared
 from .utils.misc import shared_fields_to_exlude_in_user_forms, getUserDisplayedAttrs
 from django.forms import modelform_factory, RadioSelect
@@ -22,6 +22,7 @@ urlpatterns = [
     path('entry/<spontOrLong>/', PickTeamIdView.as_view(), name="pickteamname"),
     path('adminstatus', AdminStatusView.as_view(), name="adminstatus"),
     path('adminjudgelist', AdminJudgeListView.as_view(), name="adminjudgelist"),
+    path('teambreakdown', TeamBreakdownView.as_view(), name="teambreakdown"),
 
     # path('engmid/delete/<int:pk>/', EngMiddleDelete.as_view(), name='engmid-delete'),
 

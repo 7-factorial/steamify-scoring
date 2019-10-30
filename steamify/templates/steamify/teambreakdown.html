@@ -1,0 +1,10 @@
+
+<ul>
+{% for teamdata in team_score_data %}
+    <li>{{ teamdata.team }}
+        {% include "steamify/teambreakdown_longorspont.html" with competdata=teamdata.long %}
+        {% include "steamify/teambreakdown_longorspont.html" with competdata=teamdata.spont %}
+        <br/>
+    </li>
+{% endfor %}
+</ul>

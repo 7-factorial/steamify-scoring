@@ -1,0 +1,14 @@
+<ul>
+    <li>{{ competdata.ls.value }}:
+        <ul>
+            <li>Judged by {{ competdata.numjudges }} judges. Average Scores:
+                <ul>
+                    {% for categ_name, score in competdata.categs.items %}
+                        <li>{{ categ_name|capfirst }}: {{ score }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+        <br/>
+    </li>
+</ul>

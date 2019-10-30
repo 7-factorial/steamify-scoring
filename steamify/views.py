@@ -62,6 +62,26 @@ def precalcTeam(team):
 #     return sorted(teams, key=keyfunc)
     
 
+
+
+class TeamBreakdownView(UserPassesTestMixin, TemplateView):
+    template_name = 'steamify/teambreakdown.html'
+
+    def test_func(self):
+        user = self.request.user
+        # probably unnecessarily redundant
+        return user.is_staff and user.is_superuser
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        
+        from .utils.teamscores import makeTeamScoreData
+        context['team_score_data'] = map(makeTeamScoreData, Team.objects.all())
+
+        return context
+
+
 class AdminJudgeListView(UserPassesTestMixin, TemplateView):
     template_name = 'steamify/adminjudgelist.html'
 
