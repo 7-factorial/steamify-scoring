@@ -1,6 +1,10 @@
 
 
-I would like another volunteer to help with misc.
+https://www.pythonanywhere.com/user/steamify/consoles/13800305/
+https://steamify.pythonanywhere.com/steamify/adminstatus
+https://steamify.pythonanywhere.com/steamify/adminjudgelist
+https://steamify.pythonanywhere.com/admin
+
 
 Things I'll do:
  - watch the login time
