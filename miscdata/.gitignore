@@ -1,0 +1,8 @@
+##  So the public version control doesn't have the judge names csv, team names csv, and submission backups.
+*
+
+# I DO want this file tracked
+!.gitignore
+
+# and I want the examples tracked
+!*.example

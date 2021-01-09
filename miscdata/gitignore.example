@@ -1,4 +1,0 @@
-I need to figure out a better system,
-but what I did in 2019 was gitignore * in this folder
-because I didn't want the public version control to have 
-the judge names csv, team names csv, and submission backups.
