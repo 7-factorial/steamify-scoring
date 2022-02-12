@@ -1,26 +1,12 @@
-do all things marked TODO
-
 (skipping) Make edit cutoff dynamic on the day so that I can mark it as closed
 
 (skipping) if you enter a team name that you've already graded, should I direct to edit?
-
-if time:
- - test javascript-less
- - test on iphone and a few androids
- - (not very important) Just before competition - make sure team ids and names are good
 
 (done ish) For averaging, use score_instance_to_dict to get relevant fields.
     Use assert to verify that it's averaging the expected fields for at least 2 (but ideally all)
     of the competitions. The nice thing about assert is that if anything changes
     then it will tell me. 
     Remember that averaging can be one of the final steps. 
-
-
-probably don't need these notes, but keeping in case:
-    If I use flexbox: https://css-tricks.com/equidistant-objects-with-css/  flexbox works great for labels; need to test how it looks on a phone.
-
-    I think width is good now with the viewport and max-width things I've done.
-    At some point test on an ipad
 
 
 

@@ -1,16 +1,6 @@
 
+fake team for practice: M.DE.999
 
-https://www.pythonanywhere.com/user/steamify/consoles/13800305/
 https://steamify.pythonanywhere.com/steamify/adminstatus
 https://steamify.pythonanywhere.com/steamify/adminjudgelist
 https://steamify.pythonanywhere.com/admin
-
-
-Things I'll do:
- - watch the login time
- - watch the scores for multisubmit
-
-Things the volunteer could do:
- - step them through a submission ( fake team: M.DE.999 )
- - change their password  ( optional: http://nonsense.x2d.org/ )
- - run to talk to a judge if needed
