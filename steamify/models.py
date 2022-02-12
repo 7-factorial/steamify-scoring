@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.html import format_html
 from typing import List, Type, Iterable, Optional, Dict, Any, Union
 from django.utils import timezone
-import secrets
+
 
 # Create your models here.
 from django.urls import reverse
@@ -13,33 +13,33 @@ import toolz
 # from django.contrib.auth import user_logged_in
 
 
+# Note from Jaime, August 2, 2021:
+# I created the `update_allowed_devices` function based largely on paranoia,
+# thinking that we needed to keep an eye on
+# what devices people are using.
+# I've now abandoned the idea.
+# def update_allowed_devices(request):
 
-def update_allowed_devices(request):
+#     def newid():
+#         devid = random.randint(0,100000000)
+#         request.session['steamify_device_id'] = devid
+#         request.user.alloweddevice_set.create(id=devid)
 
-    def newid():
-        devid = secrets.token_hex(6)
-        request.session['steamify_device_id'] = devid
-        request.user.alloweddevice_set.create(id=devid)
-
-    try:
-        # import ipdb; ipdb.set_trace()
-        current_devid = request.session.get('steamify_device_id')
+#     try:
+#         # import ipdb; ipdb.set_trace()
+#         current_devid = request.session.get('steamify_device_id')
         
-        id_is_in_list_of_ids = request.user.alloweddevice_set.filter(id=current_devid).exists()
+#         id_is_in_list_of_ids = request.user.alloweddevice_set.filter(id=current_devid).exists()
 
-        # probably redundant but it works
-        hasIdAndIdIsInList = current_devid and id_is_in_list_of_ids
+#         # probably redundant but it works
+#         hasIdAndIdIsInList = current_devid and id_is_in_list_of_ids
 
-        if not hasIdAndIdIsInList:
-            newid()
+#         if not hasIdAndIdIsInList:
+#             newid()
             
-    except Exception as e:
-        print(e)  # oh well.
+#     except Exception as e:
+#         print(e)  # oh well.
 
-# def boilerplatefunc(sender, request, user, **kwargs):
-    # update_allowed_devices(request)
-
-# user_logged_in.connect(boilerplatefunc)
 
 
 def nes(x):
@@ -194,35 +194,36 @@ def verify_team_id_before_creating(teamObj):
         raise ValueError("The numerical portion '{}' already exists: '{}'. All numbers must be unique".format(numericalpart, existing.dotted_id))    
 
 
-class AllowedDevice(models.Model):
+### I'm abandoning the idea of allowed devices, so I'm commenting this - August 2 2021
+# class AllowedDevice(models.Model):
 
-    # possibility for multiple allowed devices 
-    judge = models.ForeignKey(
-                User,
-                on_delete=models.PROTECT)
-    id = models.CharField(max_length=100, primary_key=True)
-    created_at = models.DateTimeField() 
-    approved = models.NullBooleanField()
+#     # possibility for multiple allowed devices 
+#     judge = models.ForeignKey(
+#                 User,
+#                 on_delete=models.PROTECT)
+#     id = models.CharField(max_length=100, primary_key=True)
+#     created_at = models.DateTimeField() 
+#     approved = models.NullBooleanField()
 
-    def __str__(self):
-        return "{} {}: {}, {}".format(self.approvedPretty(),
-                    self.judge.username, self.id, self.created_at)
+#     def __str__(self):
+#         return "{} {}: {}, {}".format(self.approvedPretty(),
+#                     self.judge.username, self.id, self.created_at)
     
-    def approvedPretty(self):
-        return {
-            True:"Approved. ",
-            False:"DENIED! ",
-            None:""
-        }[self.approved]
+#     def approvedPretty(self):
+#         return {
+#             True:"Approved. ",
+#             False:"DENIED! ",
+#             None:""
+#         }[self.approved]
 
-    def emptyIfNotApproved(self):
-        return "" if self.approved else str(self)
+#     def emptyIfNotApproved(self):
+#         return "" if self.approved else str(self)
 
-    def save(self, *args, **kwargs):
-        """On save, update timestamps"""
-        if self._state.adding:
-            self.created_at = timezone.now()
-        super().save(*args, **kwargs)
+#     def save(self, *args, **kwargs):
+#         """On save, update timestamps"""
+#         if self._state.adding:
+#             self.created_at = timezone.now()
+#         super().save(*args, **kwargs)
 
 
 

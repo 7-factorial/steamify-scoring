@@ -29,9 +29,11 @@ from .models import Team, ALL_EXCEPT_SPONT, Shared, Spont, ALL_COMPETS, update_a
 class EntryHomeView(LoginRequiredMixin, TemplateView):
     template_name = "steamify/entryhome.html"
     
-    def get(self, request, *args, **kwargs):
-        update_allowed_devices(request)
-        return super().get(request, *args, **kwargs)
+    ## This was for keeping track of devices used;
+    ## removed by Jaime Aug 2 2021
+    ### def get(self, request, *args, **kwargs):
+    ###     update_allowed_devices(request)
+    ###     return super().get(request, *args, **kwargs)
 
 
 def all_entries_by_category():
@@ -157,9 +159,11 @@ class GenericCreate(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         return addTeamToContext(self, context)
 
-    def get(self, request, *args, **kwargs):
-        update_allowed_devices(request)
-        return super().get(request, *args, **kwargs)
+    ## This was for keeping track of devices used;
+    ## removed by Jaime Aug 2 2021
+    ### def get(self, request, *args, **kwargs):
+    ###     update_allowed_devices(request)
+    ###     return super().get(request, *args, **kwargs)
 
     def form_valid(self, form):
         # as per https://docs.djangoproject.com/en/2.2/topics/class-based-views/generic-editing/#models-and-request-user
