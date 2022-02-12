@@ -1,2 +1,4 @@
-envconfig.py
-# keep this file: # envconfig.py.example
+# don't keep the real envconfig
+envconfig.py  
+
+# but do keep "envconfig.py.example"
