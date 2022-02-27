@@ -3,3 +3,6 @@ __pycache__
 venv
 .vscode
 staticfiles/
+venv2
+*VBoxHeadless*.log
+.vagrant/*
