@@ -18,7 +18,7 @@ def readOneFile(fpath):
             if User.objects.filter(username=dat["username"]).exists():
                 print("username already exists: {}".format(dat["username"]))
             else:
-                dat["password"] = get_judge_pw(dat)
+                dat["password"] = get_judge_pw(dat["username"])
                 User.objects.create_user(**dat)
 
 
