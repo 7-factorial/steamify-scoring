@@ -22,7 +22,7 @@ from .forms import PickTeamIdForm
 from .utils.misc import score_instance_to_dict, makeEditLink
 from .utils.dupe import getEntriesIfAlreadyExist
 
-from .models import Team, ALL_EXCEPT_SPONT, Shared, Spont, ALL_COMPETS, update_allowed_devices
+from .models import Team, ALL_EXCEPT_SPONT, Shared, Spont, ALL_COMPETS
 
 
 
@@ -30,7 +30,7 @@ class EntryHomeView(LoginRequiredMixin, TemplateView):
     template_name = "steamify/entryhome.html"
     
     ## This was for keeping track of devices used;
-    ## removed by Jaime Aug 2 2021
+    ## removed Aug 2 2021
     ### def get(self, request, *args, **kwargs):
     ###     update_allowed_devices(request)
     ###     return super().get(request, *args, **kwargs)
@@ -160,7 +160,7 @@ class GenericCreate(LoginRequiredMixin, CreateView):
         return addTeamToContext(self, context)
 
     ## This was for keeping track of devices used;
-    ## removed by Jaime Aug 2 2021
+    ## removed Aug 2 2021
     ### def get(self, request, *args, **kwargs):
     ###     update_allowed_devices(request)
     ###     return super().get(request, *args, **kwargs)

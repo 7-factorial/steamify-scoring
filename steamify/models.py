@@ -13,7 +13,7 @@ import toolz
 # from django.contrib.auth import user_logged_in
 
 
-# Note from Jaime, August 2, 2021:
+# Note August 2, 2021:
 # I created the `update_allowed_devices` function based largely on paranoia,
 # thinking that we needed to keep an eye on
 # what devices people are using.
@@ -342,7 +342,7 @@ class Shared(models.Model):
     # If it's same score, delete the oldest one
     # If it's different score, display on like a problem report. (presumably the person submitted twice quickly, OR they used the back button and submitted again)
     # In fact, here's a way to do that:
-    # I (Jaime) will have a status page for myself which every 20 seconds sends a json request
+    # I will have a status page for myself which every 20 seconds sends a json request
     # that will trigger the double-entry check and give some other status stuff (not yet decided what the other status stuff is).
 
 
