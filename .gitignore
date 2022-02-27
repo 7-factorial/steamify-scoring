@@ -6,3 +6,4 @@ staticfiles/
 venv2
 *VBoxHeadless*.log
 .vagrant/*
+db.sqlite3
