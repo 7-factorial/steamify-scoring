@@ -20,7 +20,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 ## SECURITY WARNING: keep the secret key used in production secret!
-from .envconfig import SECRET_KEY, DEBUG, ALLOWED_HOSTS, DATABASES
+try:
+    from .envconfig import SECRET_KEY, DEBUG, ALLOWED_HOSTS, DATABASES
+except ImportError:
+    raise ImportError("Failed to import envconfig. There are a few possible causes for this, but one reason is that my envconfig files are stored encrypted (password is in my password manager), so whenever setting up a deployment, I need to decrypt the appropriate file.")
 # SECRET_KEY = 'l)!=h=s_%lut(-2z!+7os&#nv&edelef_)-m=2ujq!)$2315jp'
 ## SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
