@@ -40,7 +40,7 @@ import toolz
 #     except Exception as e:
 #         print(e)  # oh well.
 
-
+_identFunc = lambda x: x
 
 def nes(x):
     # type: (Union[None, str, float, int]) -> Union[str, float, int]
@@ -734,7 +734,65 @@ class TheaterElem(Shared):
         Statement includes description of team work, but each member’s role is not clear.
         """)
 
-_identFunc = lambda x: x
+
+
+class MusicElem(Shared):
+    TLA = "E.MU"
+
+    firstthing = standardSteamifyField("""
+        fill
+        """)
+        
+    secondthing = standardSteamifyField("""
+        fill
+        """)
+        
+    thirdthing = standardSteamifyField("""
+        fill
+        """)
+
+
+class SciElem(Shared):
+    TLA = "E.SC"
+
+    firstthing = standardSteamifyField("""
+        fill
+        """)
+        
+    secondthing = standardSteamifyField("""
+        fill
+        """)
+        
+    thirdthing = standardSteamifyField("""
+        fill
+        """)
+
+
+class CompSciMiddle(Shared):
+    TLA = "M.CS"
+
+    firstthing = standardSteamifyField("""
+        fill
+        """)
+        
+
+class MusicMiddle(Shared):
+    TLA = "M.MU"
+
+    firstthing = standardSteamifyField("""
+        fill
+        """)
+        
+
+class SciMiddle(Shared):
+    TLA = "M.SC"
+
+    firstthing = standardSteamifyField("""
+        fill
+        """)
+
+
+
 
 class Spont(Shared):
     TLA = "FAKE_TLA_FOR_SPONT"
@@ -775,10 +833,11 @@ class Spont(Shared):
 
 
 # VERIFIED 2019 Oct 7 at 5:02 pm - this contains all competitions
+# to verify 2022 March 13 at ______ pm - this contains all competitions
 ALL_EXCEPT_SPONT = [EngMiddle, EngElem, VisualArtsMiddle, VisualArtsElem,
                     AeroMiddle, DanceMiddle, DanceElem, DebateMiddle, 
                     RocketMiddle, SpokenMiddle, SpokenElem, TheaterMiddle,
-                    TheaterElem]  # type: List[Type[Shared]]
+                    TheaterElem, MusicElem, SciElem, CompSciMiddle,
+                    MusicMiddle, SciMiddle]  # type: List[Type[Shared]]
 
-# TODO: add spont if it ends up being useful
 ALL_COMPETS = ALL_EXCEPT_SPONT + [Spont]  # type: List[Type[Shared]]
