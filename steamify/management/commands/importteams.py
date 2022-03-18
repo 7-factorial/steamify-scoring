@@ -4,15 +4,34 @@ import csv
 import os
 
 
-def readOneFile(fpath):
-    with open(fpath, encoding="utf_8_sig") as f:
+
+def _getDataFromFile(fpath):
+    with open(fpath) as f:
         reader = csv.DictReader(f)
         for line in reader:
-            Team.objects.create(
-                dotted_id=line["dotted_id"].strip(),
-                name=line["name"].strip(),
-                school_name=line["school_name"].strip(),
-                )
+            yield {
+                "dotted_id": line["dotted_id"].strip(),
+                "name": line["name"].strip(),
+                "school_name": line["school_name"].strip(),
+            }
+   
+
+## Unnecessary; this check is done elsewhere
+# def _runChecks(teamDataFromFile):
+#     def _num(x):
+#         a, b, c = x["dotted_id"].split(".")
+#         return int(c)
+
+#     nums = list(map(_num, teamDataFromFile))
+#     assert len(set(nums)) == len(nums)
+
+
+def readOneFile(fpath):
+     
+    teamDataFromFile = list(_getDataFromFile(fpath))
+
+    for teamdat in teamDataFromFile:
+        Team.objects.create(**teamdat)
 
 
 class Command(BaseCommand):
