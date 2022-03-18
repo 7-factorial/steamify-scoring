@@ -7,19 +7,23 @@ import os
 
 
 def readOneFile(fpath):
-    with open(fpath, encoding="utf_8_sig") as f:
+    with open(fpath) as f:
         reader = csv.DictReader(f)
         for line in reader:
+            un = line["username"].strip()
+            if not un:
+                raise ValueError("Empty username. Either edit the judgeData.csv directly, or use the makeUsernames command.")
+            if User.objects.filter(username=un).exists():
+                raise ValueError("username already exists: {}".format(un))
+            
             dat = {
-                "username": line["username"].strip(),
+                "username": un,
                 "first_name": line["first_name"].strip(),
                 "last_name": line["last_name"].strip(),
+                "password": get_judge_pw(un)
             }
-            if User.objects.filter(username=dat["username"]).exists():
-                print("username already exists: {}".format(dat["username"]))
-            else:
-                dat["password"] = get_judge_pw(dat["username"])
-                User.objects.create_user(**dat)
+            
+            User.objects.create_user(**dat)
 
 
 class Command(BaseCommand):
