@@ -48,9 +48,9 @@ def _doit():
 
     newLines = list(map(_makeUsernameIfNeeded, oldLines))
 
-    if newLines == oldLines:
+    # if newLines == oldLines:
         # no need to write to file if it didn't change.
-        return
+        # return
 
     _reportDupes(newLines)
 
