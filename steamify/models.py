@@ -351,27 +351,34 @@ class EngMiddle(Shared):
     TLA = "M.EN"
     presentation = standardSteamifyField("""
         Presentation demonstrates understanding of the material.
-        Presenters facilitate engaging discussion regarding challenge expectations.  
-        Presenters explain their research concerning the CO2 device as it relates to environmental sustainability.
+        Presenters facilitate engaging discussion regarding challenge expectations
+        Presenters explain their research concerning the solution and relate to the Essential Question but not the Grand Challenge Driving Question.
         The purpose of the design is clear, realistic, and presenters share how it may be scaled up.
-        Most students have an explicit part in either the explanation or demonstration of the design process regarding the prototype; however, one or two may function as support.
+        Most students have an explicit part in either the explanation or demonstration of the design process regarding the prototype ; however, one or two may function as support.
         """)
         
     design_notebook = standardSteamifyField("""
         Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
         Design process somewhat chronicled.
-        Design notebook quality is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
         """)
         
     engineering_design_prototype_working_model = standardSteamifyField("""
-        The operation and design of the prototype somewhat fulfill the challenge, but is unclear in some aspects.
+        The operation and design of the prototype somewhat fulfills the challenge, but is unclear in some aspects.
         """,
         verbose_name="Engineering Design/Prototype/Working Model")
         
     engineering_statement = standardSteamifyField("""
         Written statement submitted at the time of performance.
-        Statement is neat and has 1-3 spelling/grammatical/punctuation errors.
+        Statement is neat and has 1-3 spelling/grammatical/punct uation errors.
         Statement links standards to key elements and outcome, but may be unclear in one or two places.
+        """)
+
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
         """)
     
 
@@ -380,16 +387,16 @@ class EngElem(Shared):
     
     presentation = standardSteamifyField("""
         Presentation demonstrates understanding of the material.
-        Presenters facilitate engaging discussion regarding challenge expectations 
-        Presenters explain their research concerning the shoe  as it relates to environmental sustainability.
-        The  purpose of the design is clear, realistic, and share how production may be scaled up.
+        Presenters facilitate engaging discussion regarding challenge expectations
+        Presenters explain their research concerning the solution/device and relate to the Essential Question but not the Grand Challenge Driving Question.
+        The purpose of the design is clear, realistic, and share how production may be scaled up.
         Most students have an explicit part in either the explanation or demonstration of the design process regarding the prototype ; however, one or two may function as support.
         """)
         
     design_notebook = standardSteamifyField("""
         Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
         Design process somewhat chronicled.
-        Design notebook quality is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
         """)
         
     engineering_design_prototype_working_model = standardSteamifyField(""" 
@@ -402,6 +409,13 @@ class EngElem(Shared):
         Statement is neat and has 1-3 spelling/grammatical/punctuation errors.
         Statement links standards to key elements and outcome, but may be unclear in one or two places.
         """)
+    
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
+        """)
 
 
 
@@ -410,29 +424,35 @@ class VisualArtsMiddle(Shared):
     
     presentation = standardSteamifyField("""
         Presentation clarity (Clear message, some eye contact, appropriate responses, and a suitable presentation standard).
-        Some research is observable during the presentation. 
-        All but one team member are present OR all are present and one member does not participate.
+        Some research is observable during the presentation.
+        All but one team member are present OR all are present and one member does not participate
 		""")
         
     artwork = standardSteamifyField("""
-        Artwork identifies obvious technology impacts for each year. 
-        Artwork illustrates some contrived positive and negative impacts.
         Artwork reflects thorough examination of the topic.
         Artwork develops visual imagery.
         Artwork demonstrates unity of thought, imagery, form, media and techniques in support of creative intent.
+        Artwork is missing one requirement (4 signs, unique name, unique logo, campaign theme).
 		""")
         
     design_notebook = standardSteamifyField(""" 
 		Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
         Design process somewhat chronicled.
-        Design notebook quality is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
 		""")
         
     artist_statement = standardSteamifyField("""
-        Statement is neat and has less than two spelling/grammatical/punctuation errors.
-        Statement includes standards and key elements 
+        Statement is neat and has less than two spelling/grammatical/punct uation errors.
+        Statement includes standards and key elements
         How some standards/elements fit into story outcome is somewhat unclear.
         Statement includes description of team work, but each member’s role is not clear.
+		""")
+
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
 		""")
 
 
@@ -441,29 +461,36 @@ class VisualArtsElem(Shared):
     
     presentation = standardSteamifyField("""
         Presentation clarity (Clear message, some eye contact, appropriate responses, and a suitable presentation standard).
-        Some research is observable during the presentation. 
+        Some research is observable during the presentation.
         All but one team member are present OR all are present and one member does not participate.
         """)
         
     artwork = standardSteamifyField("""
-        Artwork identifies one technology impact. 
-        Artwork illustrates some contrived positive and negative impacts.
         Artwork reflects thorough examination of the topic.
         Artwork develops visual imagery.
         Artwork demonstrates unity of thought, imagery, form, media and techniques in support of creative intent.
+        Artwork is missing one requirement.
+        Sculpture is to scale, but not full size.
         """)
         
     design_notebook = standardSteamifyField("""
         Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
         Design process somewhat chronicled.
-        Design notebook quality is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
         """)
         
     artist_statement = standardSteamifyField("""
-        Statement is neat and has less than two spelling/grammatical/punctuation errors.
-        Statement includes standards and key elements 
+        Statement is neat and has less than two spelling/grammatical/pun ctuation errors.
+        Statement includes standards and key elements
         How some standards/elements fit into story outcome is somewhat unclear.
-        Statement includes description of team work, but each member’s role is not clear.
+        Statement includes description of team work, but each member's role is not clear.
+        """)
+    
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview.
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
         """)
 
 
@@ -480,7 +507,8 @@ class AeroMiddle(Shared):
         
     design_notebook = standardSteamifyField("""
         Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
-        Design notebook quality is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        Design process somewhat chronicled.
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
 		""")
         
     fulfillment_of_problem = standardSteamifyField("""
@@ -488,58 +516,80 @@ class AeroMiddle(Shared):
         The flight time is in the middle third of all teams.
 		""",
         verbose_name="Fulfillment of Problem")
+        # verbose name is here so that "of" is lowercase
         
     engineering_statement = standardSteamifyField("""
         Written statement submitted at the time of performance.
-        Statement is neat and has 1-3 spelling/grammatical/punctuation errors.
+        Statement is neat and has 1-3 spelling/grammatical/ punctuation errors.
         Statement links standards to key elements and outcome, but may be unclear in one or two places.
 		""")
 
-
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
+        """)
 
 class DanceMiddle(Shared):
     TLA = "M.DA"
 
     presentation = standardSteamifyField("""
-        Storyline or concept of dance incorporates a technological advancement but makes an unclear statement about its effects.
+        Storyline or concept of dance incorporates all challenge requirements but makes an unclear statement about its effects/impacts.
         Music or props, rather than dance elements, tell a majority of the story.
         One prop/costume/set item is not made by students.
+        Time for dance is too short or too long by < 30 seconds.
 		""")
         
     design_notebook = standardSteamifyField("""
         Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
         Design process somewhat chronicled.
-        Design notebook quality is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
         """)
         
     artist_statement = standardSteamifyField("""
-        Statement is neat and has less than two spelling/grammatical/punctuation errors.
-        Statement includes standards and key elements 
+        Statement is neat and has less than two spelling/grammatical/ punctuation errors.
+        Statement includes standards and key elements
         How some standards/elements fit into story outcome is somewhat unclear.
-        Statement includes description of team work, but each member’s role is not clear.
+        Statement includes description of team work, but each member's role is not clear.
 		""")
+
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
+        """)
 
 
 class DanceElem(Shared):
     TLA = "E.DA"
 
     presentation = standardSteamifyField("""
-        Storyline or concept of dance incorporates a technological advancement but makes an unclear statement about its effects.
+        Storyline or concept of dance incorporates all challenge requirements but makes an unclear statement about its effects/impacts.
         Music or props, rather than dance elements, tell a majority of the story.
         One prop/costume/set item is not made by students.
+        Time for dance is too short or too long by < 30 seconds.
 		""")
         
     design_notebook = standardSteamifyField("""
         Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
         Design process somewhat chronicled.
-        Design notebook quality is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
         """)
         
     artist_statement = standardSteamifyField("""
         Statement is neat and has less than two spelling/grammatical/punctuation errors.
-        Statement includes standards and key elements 
+        Statement includes standards and key elements
         How some standards/elements fit into story outcome is somewhat unclear.
-        Statement includes description of team work, but each member’s role is not clear.
+        Statement includes description of team work, but each member's role is not clear.
+        """)
+
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
         """)
 
 
@@ -555,7 +605,7 @@ class DebateMiddle(Shared):
         Most information presented in the debate was clear and accurate, but was not usually thorough
         """)
         
-    rebutal = standardSteamifyField("""
+    rebuttal = standardSteamifyField("""
         Most counter-arguments were accurate and relevant, but several were weak.
         """)
 
@@ -565,17 +615,24 @@ class DebateMiddle(Shared):
         verbose_name="Use of Facts/Statistics")
 
     organization = standardSteamifyField("""
-        Most counter-arguments were accurate and relevant, but several were weak.
+        Most arguments were clearly tied to an idea (premise) and organized in a tight, logical fashion.
         """)
         
     understanding_of_topic = standardSteamifyField("""
-        The team seemed to understand the main points of the topic and presented those with ease.       
+        The team seemed to understand the main points of the topic and presented those with ease.
         """)
         
     design_notebook = standardSteamifyField("""
         Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
         Design process somewhat chronicled.
-        Design notebook quality is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        """)
+
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
         """)
 
 
@@ -619,24 +676,24 @@ class SpokenMiddle(Shared):
     TLA = "M.SW"
 
     presentation = standardSteamifyField("""
-        All team members have explicit roles in the performance, but one or more have notably lesser roles. 
-        Eye contact is made and maintained with the audience with some breaks in the performance. 
-        No reading of notes. 
+        All team members have explicit roles in the performance, but one or more have notably lesser roles.
+        Eye contact is made and maintained with the audience with some breaks in the performance.
+        No reading of notes.
         Verbal cues such as tone, pace, volume and intended pauses are used and further the impact; most are effective.
-        Non verbal cues such as gestures, facial expressions and body language are used and further the impact but some may be ineffective.
-        Speakers exude positive energy and use animated speech. 
-        The performance somewhat fulfills the challenge, but is unclear in some aspects. 
+        Non-verbal cues such as gestures, facial expressions and body language are used and further the impact but some may be ineffective.
+        Speakers exude positive energy and use animated speech.
+        The performance somewhat fulfills the challenge, but is unclear in some aspects.
         """)
         
     design_notebook = standardSteamifyField("""
         Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
         Design process somewhat chronicled.
-        Design notebook quality is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
         """)
         
     artist_statement = standardSteamifyField("""
         Statement is neat and has less than two spelling/grammatical/punctuation errors.
-        Statement includes standards and key elements 
+        Statement includes standards and key elements
         How some standards/elements fit into story outcome is somewhat unclear.
         Statement includes description of team work, but each member’s role is not clear.
         """)
@@ -644,32 +701,39 @@ class SpokenMiddle(Shared):
     poem = standardSteamifyField("""
         Poem includes language that promotes vivid images that contribute to the poem
         The poem does address the issue at hand.
-        The poem has less than 2  grammatical errors.
-        The poem is somewhat impactful piece.
+        The poem has less than 2 grammatical errors.
+        The poem is somewhat impactful piece.        
+        """)
+    
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview 
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
         """)
 
 class SpokenElem(Shared):
     TLA = "E.SW"
 
     presentation = standardSteamifyField("""
-        All team members have explicit roles in the performance, but one or more have notably lesser roles. 
-        Eye contact is made and maintained with the audience with some breaks in the performance. 
-        No reading of notes. 
+        All team members have explicit roles in the performance, but one or more have notably lesser roles.
+        Eye contact is made and maintained with the audience with some breaks in the performance.
+        No reading of notes.
         Verbal cues such as tone, pace, volume and intended pauses are used and further the impact, but some may be ineffective.
-        Non verbal cues such as gestures, facial expressions and body language are used and further the impact but some may be ineffective.
-        Speakers exude positive energy and use animated speech. 
-        The performance somewhat fulfills the challenge, but is unclear in some aspects. 
+        Nonverbal cues such as gestures, facial expressions and body language are used and further the impact but some may be ineffective.
+        Speakers exude positive energy and use animated speech.
+        The performance somewhat fulfills the challenge, but is unclear in some aspects.
         """)
         
     design_notebook = standardSteamifyField("""
         Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
         Design process somewhat chronicled.
-        Design notebook quality is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
         """)
         
     artist_statement = standardSteamifyField("""
-        Statement is neat and has less than two spelling/grammatical/punctuation errors.
-        Statement includes standards and key elements 
+        Statement is neat and has less than two spelling/grammatical/punc tuation errors.
+        Statement includes standards and key elements
         How some standards/elements fit into story outcome is somewhat unclear.
         Statement includes description of team work, but each member’s role is not clear.
         """)
@@ -679,6 +743,13 @@ class SpokenElem(Shared):
         The poem does address the issue at hand.
         The poem has less than 2 grammatical errors.
         The poem is somewhat impactful piece.
+        """)
+
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
         """)
 
 
@@ -692,21 +763,28 @@ class TheaterMiddle(Shared):
         Presentation easily heard or understood by audience.
         Presentation mostly fulfills the challenge.
         Time limit exceeded by > 30 s.
-        Most students maintained character throughout the play, even when not speaking.  
+        Most students maintained character throughout the play, even when not speaking.
         Most students have an explicit part in the acting and support.
         """)
         
     design_notebook = standardSteamifyField("""
         Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
         Design process somewhat chronicled.
-        Design notebook quality is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
         """)
         
     artist_statement = standardSteamifyField("""
-        Statement is neat and has less than two spelling/grammatical/punctuation errors.
-        Statement includes standards and key elements 
+        Statement is neat and has less than two spelling/grammatical/punct uation errors.
+        Statement includes standards and key elements
         How some standards/elements fit into story outcome is somewhat unclear.
         Statement includes description of team work, but each member’s role is not clear.
+        """)
+
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
         """)
 
 class TheaterElem(Shared):
@@ -717,21 +795,28 @@ class TheaterElem(Shared):
         Presentation easily heard or understood by audience.
         Presentation mostly fulfills the challenge.
         Time limit exceeded by > 30 s.
-        Most students maintained character throughout the play, even when not speaking.  
+        Most students maintained character throughout the play, even when not speaking.
         Most students have an explicit part in the acting and support.
         """)
         
     design_notebook = standardSteamifyField("""
         Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
         Design process somewhat chronicled.
-        Design notebook quality is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
         """)
         
     artist_statement = standardSteamifyField("""
         Statement is neat and has less than two spelling/grammatical/punctuation errors.
-        Statement includes standards and key elements 
+        Statement includes standards and key elements
         How some standards/elements fit into story outcome is somewhat unclear.
-        Statement includes description of team work, but each member’s role is not clear.
+        Statement includes description of team work, but each member's role is not clear.
+        """)
+
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
         """)
 
 
@@ -739,56 +824,172 @@ class TheaterElem(Shared):
 class MusicElem(Shared):
     TLA = "E.MU"
 
-    firstthing = standardSteamifyField("""
-        fill
+    presentation = standardSteamifyField("""
+        Musical piece has a formal structure, but leitmotif does not always align.
+        Piece is within the practical range of the instrument but has too many difficult passages for players of this level.
+        Melody seems complete by lacks imagination.
+        Rhythm is stable but does not have any variety or does not make musical sense for the piece as a whole.
+        Performance exceeds time limit by ≥ 30 seconds
         """)
         
-    secondthing = standardSteamifyField("""
-        fill
+    design_notebook = standardSteamifyField("""
+        Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
+        Design process somewhat chronicled.
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
         """)
         
-    thirdthing = standardSteamifyField("""
-        fill
+    artist_statement = standardSteamifyField("""
+        Statement is neat and has less than two spelling/grammatical /punctuation errors.
+        Statement includes standards and key elements
+        How some standards/elements fit into story outcome is somewhat unclear.
+        Statement includes description of team work, but each member’s role is not clear.
+        """)
+
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
         """)
 
 
 class SciElem(Shared):
     TLA = "E.SC"
 
-    firstthing = standardSteamifyField("""
-        fill
+    presentation = standardSteamifyField("""
+        Presentation demonstrates understanding of the material.
+        Presenters facilitate engaging discussion regarding challenge expectations
+        Presenters explain their research concerning the solution/device and relate to the Essential Question but not the Grand Challenge Driving Question.
+        The purpose of the design is clear, realistic, and share how production may be scaled up.
+        Most students have an explicit part in either the explanation or demonstration of the design process regarding the prototype ; however, one or two may function as support.
         """)
         
-    secondthing = standardSteamifyField("""
-        fill
-        """)
-        
-    thirdthing = standardSteamifyField("""
-        fill
+    design_notebook = standardSteamifyField("""
+        Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
+        Design process somewhat chronicled.
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
         """)
 
+    engineering_design_prototype_working_model = standardSteamifyField("""
+        The operation and design of the prototype somewhat fulfill the challenge, but is unclear in some aspects.
+        """,
+        verbose_name="Engineering Design/Prototype/Working Model")
+
+    science_statement = standardSteamifyField("""
+        Written statement submitted at the time of performance.
+        Statement is neat and has 1-3 spelling/grammatical/punctuation errors.
+        Statement links standards to key elements and outcome, but may be unclear in one or two places.
+        """)
+
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
+        """)
 
 class CompSciMiddle(Shared):
     TLA = "M.CS"
 
-    firstthing = standardSteamifyField("""
-        fill
+    presentation = standardSteamifyField("""
+        Presentation demonstrates understanding of the needs of the Essential Question.
+        Presenters facilitate engaging discussion regarding challenge expectations
+        Presenters explain their web application as it relates to ease of use.
+        The purpose of the design is clear and realistic.
+        Most students have an explicit part in either the explanation or demonstration of the design process regarding the application; however, one or two may function as support.
+        """)
+
+    design_notebook = standardSteamifyField("""
+        Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
+        Design process somewhat chronicled.
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        """)
+
+    operation_and_design = standardSteamifyField("""
+        The operation and design of the application somewhat fulfill the challenge, but is unclear in some aspects.
+        """)
+
+    engineering_statement = standardSteamifyField("""
+        Written statement submitted at the time of performance.
+        Statement is neat and has 1-3 spelling/grammatical/punctuation errors.
+        Statement links standards to key elements and outcome, but may be unclear in one or two places.        
+        """)
+
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
         """)
         
 
 class MusicMiddle(Shared):
     TLA = "M.MU"
 
-    firstthing = standardSteamifyField("""
-        fill
+    presentation = standardSteamifyField("""
+        Includes some interesting musical ideas.
+        The general impression is pleasant and moderately effective.
+        Musical idea involves some original aspect(s).
+        Explores and varies at one musical element.
+        Presents one complete musical idea.
+        Composition lacks overall completeness.
+        Uses at least one musical element to organize the musical ideas and overall form.
+        """)
+
+    design_notebook = standardSteamifyField("""
+        Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
+        Design process somewhat chronicled.
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        """)
+
+    artist_statement = standardSteamifyField("""
+        Statement is neat and has less than two spelling/grammatical /punctuation errors.
+        Statement includes standards and key elements
+        How some standards/elements fit into story outcome is somewhat unclear.
+        Statement includes description of team work, but each member’s role is not clear.
+        """)
+
+    student_interview =  standardSteamifyField("""
+        One team member does not participate meaningfully in interview
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
         """)
         
 
 class SciMiddle(Shared):
     TLA = "M.SC"
 
-    firstthing = standardSteamifyField("""
-        fill
+    presentation = standardSteamifyField("""
+        Presentation demonstrates understanding of the material.
+        Presenters facilitate engaging discussion regarding challenge expectations
+        Presenters explain their research concerning the solution and relate to the Essential Question but not the Grand Challenge Driving Question.
+        The purpose of the design is clear, realistic, and presenters share how it may be scaled up.
+        Most students have an explicit part in either the explanation or demonstration of the design process regarding the prototype ; however, one or two may function as support.
+        """)
+
+    design_notebook = standardSteamifyField("""
+        Relevant research from more than 3 different reputable resources is included and documented in the design notebook in “Resources” section.
+        Design process somewhat chronicled.
+        Design notebook is at standard (Table of contents is inaccurate, page numbers are mostly correct, titles and dates are somewhat clear, entries and figures are clear).
+        """)
+
+    engineering_design_prototype_working_model = standardSteamifyField("""
+        The operation and design of the prototype somewhat fulfills the challenge, but is unclear in some aspects.
+        """,
+        verbose_name="Engineering Design/Prototype/Working Model")
+
+    science_statement = standardSteamifyField("""
+        Written statement submitted at the time of performance.
+        Statement is neat and has 1-3 spelling/grammatical/punctuation errors.
+        Statement links standards to key elements and outcome, but may be unclear in one or two places.
+        """)
+
+    student_interview = standardSteamifyField("""
+        One team member does not participate meaningfully in interview
+        Team discussion links solution to Challenge Essential Question (EQ) with some gaps.
+        Team discussion links solution to Grand Challenge Driving Question (DQ) with some gaps.
+        Team discussion links solution to AARP domain with some gaps.
         """)
 
 

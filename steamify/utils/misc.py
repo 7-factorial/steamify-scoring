@@ -35,7 +35,7 @@ def getUserDisplayedAttrs(instanceOrClass):
     # widgets = dict((nam, RadioSelect) for nam in namesForDict)  # type: Dict[str, Input]
     # return widgets
 
-assert getUserDisplayedAttrs(EngMiddle) == ["presentation", "design_notebook", "engineering_design_prototype_working_model", "engineering_statement"]
+assert getUserDisplayedAttrs(EngMiddle) == ["presentation", "design_notebook", "engineering_design_prototype_working_model", "engineering_statement", "student_interview"]
 # TODO: a test for spont
 
 def score_instance_to_dict(instance):
