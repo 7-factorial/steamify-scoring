@@ -1,5 +1,5 @@
 
-fake team for practice: M.DE.999
+fake team for practice: Search for 999
 
 https://steamify.pythonanywhere.com/steamify/adminstatus
 https://steamify.pythonanywhere.com/steamify/adminjudgelist
