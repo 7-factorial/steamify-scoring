@@ -180,6 +180,17 @@ def verify_team_id_before_creating(teamObj):
     
     if gradeletter not in ("E", "M"):
         raise ValueError("Team id must start with E or M")
+
+    try:
+        npi = int(numericalpart)  # this will throw if can't convert to int
+    except ValueError:
+        raise ValueError(f"The following team id should have a numerical third part, but doesn't: {dotid}")
+
+    # Converting back should produce the same string. If not, then there is space or something else undesirable in the original id
+    if str(npi) != numericalpart:
+        raise ValueError(f"The numerical part of this team id seems problematic. It may have some leading or trailing space that should be removed. {dotid}")
+        
+        
     
     thisTla = gradeletter + "." + subject
     TLAS = [x.TLA for x in ALL_EXCEPT_SPONT]
