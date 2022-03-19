@@ -33,6 +33,18 @@ def readOneFile(fpath):
     for teamdat in teamDataFromFile:
         Team.objects.create(**teamdat)
 
+    try:
+        Team.objects.create(
+            dotted_id="M.RO.999",
+            name="Fake team for testing",
+            school_name="Fake"
+        )
+    except Exception as e:
+        print("Minor warning:"
+            "Tried to create a fake team called"
+            "M.RO.999"
+            "But was unable to for some reason.")
+
 
 class Command(BaseCommand):
 
