@@ -6,3 +6,10 @@
 
 # and I want the examples tracked
 !*.example
+
+# and I haven't found a better place to put these
+!encrypt_for_git.sh
+!decrypt_for_local.sh
+
+# Encrypted stuff can be in repo
+!*.gpg
