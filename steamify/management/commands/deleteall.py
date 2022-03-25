@@ -9,10 +9,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):    
         ## commented for safety
 
-        # Team.objects.all().delete()
-        
         # for Compet in ALL_COMPETS:
             # Compet.objects.all().delete()
+
+        # Team.objects.all().delete()
 
         # User.objects.filter(is_staff=False).delete()
 
