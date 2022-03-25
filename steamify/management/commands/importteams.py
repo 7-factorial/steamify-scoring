@@ -14,7 +14,7 @@ def _getDataFromFile(fpath):
                 "name": line["name"].strip(),
                 "school_name": line["school_name"].strip(),
             }
-   
+
 
 ## Unnecessary; this check is done elsewhere
 # def _runChecks(teamDataFromFile):
@@ -27,7 +27,7 @@ def _getDataFromFile(fpath):
 
 
 def readOneFile(fpath):
-     
+
     teamDataFromFile = list(_getDataFromFile(fpath))
 
     for teamdat in teamDataFromFile:
@@ -50,4 +50,3 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         readOneFile(os.path.join("miscdata", "teamData.csv"))
-        
