@@ -26,13 +26,15 @@ def _getDataFromFile(fpath):
 #     assert len(set(nums)) == len(nums)
 
 
-def readOneFile(fpath):
+def _readOneFile(fpath):
 
     teamDataFromFile = list(_getDataFromFile(fpath))
 
     for teamdat in teamDataFromFile:
         Team.objects.create(**teamdat)
 
+
+def _createFakeTeam():
     try:
         Team.objects.create(
             dotted_id="M.RO.999",
@@ -43,10 +45,12 @@ def readOneFile(fpath):
         print("Minor warning:"
             "Tried to create a fake team called"
             "M.RO.999"
-            "But was unable to for some reason.")
+            "But was unable to for some reason:")
+        print(e)
 
 
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        readOneFile(os.path.join("miscdata", "teamData.csv"))
+        _readOneFile(os.path.join("miscdata", "teamData.csv"))
+        _createFakeTeam()
